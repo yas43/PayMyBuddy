@@ -32,16 +32,32 @@ public class UserController {
 //        return "showallusertemporary";
 //    }
 
-        @GetMapping("/show")
-    public String showalluser(Model model){
-        model.addAttribute("user",userService.callUserById(id));
-        return "showallusertemporary";
-    }
+//        @GetMapping("/show")
+//    public String showalluser(Model model){
+//        model.addAttribute("user",userService.callUserById(id));
+//        return "showallusertemporary";
+//    }
 
     @PutMapping("/update")
     public String update(@ModelAttribute ("User") User user){
         userService.updateuser(user);
         return "save";
+    }
+    @GetMapping("/find")
+    public String findByUsername(){
+//        model.addAttribute("user",new User());
+//        User user = userService.findUserByUsername(username);
+//        model.addAttribute("user",user);
+        return "findusertemporary";
+
+    }
+
+    @PostMapping("/find/user")
+    public String findByUsernameshow(@RequestParam("username") String username,Model model){
+        User user = userService.findUserByUsername(username);
+        model.addAttribute("user",user);
+        return "resulttemporary";
+
     }
 
 }

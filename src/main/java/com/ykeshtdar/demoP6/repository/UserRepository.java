@@ -4,6 +4,9 @@ import com.ykeshtdar.demoP6.model.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
 
+import java.util.*;
+
 @Repository
 public interface UserRepository extends JpaRepository <User,Integer> {
+     User findByUsername(String username);
 }
