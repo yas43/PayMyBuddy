@@ -25,9 +25,23 @@ public class UserController {
         userService.saveUserInfo(user);
         return"save";
     }
-    @GetMapping("/show")
+//    @GetMapping("/show")
+//    public String showalluser(Model model){
+//        model.addAttribute("user",userService.showAllUser());
+//        model.addAttribute("user",userService.callyaser_temp());
+//        return "showallusertemporary";
+//    }
+
+        @GetMapping("/show")
     public String showalluser(Model model){
-        model.addAttribute("user",userService.showAllUser());
+        model.addAttribute("user",userService.callUserById(id));
         return "showallusertemporary";
     }
+
+    @PutMapping("/update")
+    public String update(@ModelAttribute ("User") User user){
+        userService.updateuser(user);
+        return "save";
+    }
+
 }

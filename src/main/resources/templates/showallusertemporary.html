@@ -6,23 +6,48 @@
     <title>Title</title>
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Author</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user:${user}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.password}"></td>
-        <td th:text="${user.balance}"></td>
-        <td th:text="${user.email}"></td>
-    </tr>
-    </tbody>
-</table>
+<form th:action="@{/user/update}" th:object="${User}" th:method="post" class="inscription">
+
+    <input type="hidden" name="_method" value="put" />
+
+<!--    <input type="text" id="usernameId"  name="username" th:placeholder="#{user.placeholder}" />-->
+
+
+
+    <label for="name">user name:</label>
+    <input type="text" id="name"  name="username" th:placeholder="${user.username}" /><br><br>
+<!--    <input type="text" id="name" name="username" th:field="*{username}"><br><br>-->
+    <label for="mail">mail:</label>
+    <input type="text" id="mail"  name="email" th:placeholder="${user.email}" /><br><br>
+<!--    <input type="text" id="mail" name="email" th:field="*{email}"><br><br>-->
+    <label for="pass">password:</label>
+    <input type="text" id="pass"  name="password" th:placeholder="${user.password}" /><br><br>
+<!--    <input type="text" id="pass" name="password" th:field="*{password}"><br><br>-->
+    <input type="submit" value="Submit">
+</form>
+
+
+
+
+
+
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Title</th>-->
+<!--        <th>Author</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="user:${user}">-->
+<!--        <td th:text="${user.id}"></td>-->
+<!--        <td th:text="${user.username}"></td>-->
+<!--        <td th:text="${user.password}"></td>-->
+<!--        <td th:text="${user.balance}"></td>-->
+<!--        <td th:text="${user.email}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
 </body>
 </html>
