@@ -25,4 +25,9 @@ public class UserController {
         userService.saveUserInfo(user);
         return"save";
     }
+    @GetMapping("/show")
+    public String showalluser(Model model){
+        model.addAttribute("user",userService.showAllUser());
+        return "showallusertemporary";
+    }
 }

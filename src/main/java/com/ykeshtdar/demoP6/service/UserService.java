@@ -4,6 +4,8 @@ import com.ykeshtdar.demoP6.model.*;
 import com.ykeshtdar.demoP6.repository.*;
 import org.springframework.stereotype.*;
 
+import java.util.*;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -24,5 +26,9 @@ public class UserService {
     }
     public void pay(){
 
+    }
+    public List<User> showAllUser(){
+        List<User> userList = userRepository.findAll();
+        return userList;
     }
 }
