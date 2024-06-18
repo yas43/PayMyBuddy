@@ -1,6 +1,7 @@
 package com.ykeshtdar.demoP6.controller;
 
 import com.ykeshtdar.demoP6.model.*;
+import com.ykeshtdar.demoP6.repository.*;
 import com.ykeshtdar.demoP6.service.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+
     }
 
     @GetMapping
@@ -32,17 +35,30 @@ public class UserController {
 //        return "showallusertemporary";
 //    }
 
-//        @GetMapping("/show")
-//    public String showalluser(Model model){
-//        model.addAttribute("user",userService.callUserById(id));
-//        return "showallusertemporary";
-//    }
+        @GetMapping("/show")
+    public String showalluser(Model model){
+        int id = userService.loginuser("yaser","123456").getId();
+        model.addAttribute("user",userService.callUserById(id));
+        return "showallusertemporary";
+    }
 
     @PutMapping("/update")
     public String update(@ModelAttribute ("User") User user){
-        userService.updateuser(user);
-        return "save";
+        int id = userService.loginuser("yaser","123456").getId();
+//        if (user.getEmail() != null && user.getUsername() != null && user.getPassword() != null) {
+//             userService.findUserByUsername(user.getUsername()).getId();
+//            userService.callUserById();
+//            int id = userService.findUserByUsername(user.getUsername()).getId();
+            userService.updateuser(user,id);
+
+
+            return "save";
+//        }
+//        else {
+//            throw new RuntimeException("fill all the fields please");
+//        }
     }
+
     @GetMapping("/find")
     public String findByUsername(){
 //        model.addAttribute("user",new User());

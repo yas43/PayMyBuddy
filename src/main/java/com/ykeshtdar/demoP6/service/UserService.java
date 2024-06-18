@@ -42,8 +42,27 @@ public class UserService {
         return user;
     }
 
-    public User updateuser(User user){
-        return userRepository.save(user);
+    public User updateuser(User user,int id){
+
+//        int id =userRepository.findByUsername(user.getUsername()).getId();
+
+//      User user = userRepository.findById(id);
+        Optional<User> optional = userRepository.findById(id);
+        User actualuser = null;
+//        User actualuser = new User();
+        if (optional.isPresent()){
+
+            actualuser = optional.get();
+
+            actualuser.setUsername(user.getUsername());
+            actualuser.setPassword(user.getPassword());
+            actualuser.setEmail(user.getEmail());
+        }
+        else {
+            throw new RuntimeException("user do not exist");
+        }
+//        return user;
+        return userRepository.save(actualuser);
     }
 
     public User callUserById(int id){
@@ -59,6 +78,17 @@ public class UserService {
     }
     public User findUserByUsername(String username){
        return userRepository.findByUsername(username);
+    }
+
+    public User loginuser(String username,String password){
+        User currentUser = userRepository.findByUsername(username);
+        if (currentUser != null){
+            currentUser.setUsername(userRepository.findByUsername(username).getUsername());
+        }
+        else {
+            throw new RuntimeException("user dose not exist");
+        }
+        return currentUser;
     }
 
 }
