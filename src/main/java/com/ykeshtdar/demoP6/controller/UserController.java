@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final TransactionService transactionService;
 
 
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService, UserRepository userRepository, TransactionService transactionService) {
         this.userService = userService;
 
+        this.transactionService = transactionService;
     }
 
     @GetMapping("/signUp")
@@ -47,11 +49,11 @@ public class UserController {
 //        return "showallusertemporary";
 //    }
 
-        @GetMapping("/show")
+        @GetMapping("/modify")
     public String showalluser(Model model){
         int id = userService.loginuser("yaser","123456").getId();
         model.addAttribute("user",userService.callUserById(id));
-        return "showallusertemporary";
+        return "modifyinfo";
     }
 
     @PutMapping("/update")
@@ -86,6 +88,12 @@ public class UserController {
         model.addAttribute("user",user);
         return "resulttemporary";
 
+    }
+
+    @GetMapping("/display")
+    public String displayinfo(@RequestParam int receiver_id,int sender_id,Model model){
+        model.addAttribute("info",transactionService.displayTransaction(receiver_id,sender_id));
+        return "comptpage";
     }
 
 }
