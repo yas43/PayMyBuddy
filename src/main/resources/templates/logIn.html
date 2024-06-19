@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+
+    html{
+        font-size: 62.5%;
+    }
+
+    body {
+  font-family: "Rubik", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #555;
+}
+    .container{
+        max-width: 120 rem;
+        padding: 0 3.2rem;
+        margin: 0 auto;
+       
+    }
+
+
+    .header{
+        background-color: rgb(246, 248, 212); 
+        display: flex;
+        justify-content: center;
+        height: 10rem; 
+        /* width: 50%; */
+        padding-top: 5rem;
+    
+    }
+    .title{
+        background-color: rgb(202, 202, 235);
+        padding-top: 5rem;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .body{
+        display:flex;
+        justify-content: center;
+        background-color: rgb(213, 233, 213);
+        /* width: 50%; */
+       
+
+    }
+
+    .bodycontainer{
+        background-color: rgb(191, 155, 224);
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        display: flex;
+        justify-content: center;
+        width: 50%;
+    }
+   
+    .inscription{
+        display:flex;
+        gap: 2.4 rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+   
+
+</style>
+<body>
+    
+    <div class="container">
+        <div class="header">
+           <div class="title">
+                <p>pay my buddy</p>
+            </div>
+        </div>
+        
+        <div class="body">
+            <div class="bodycontainer">
+                <form th:action="@{/user/connection}" th:object="${User}" method="post" class="inscription">
+                    <label for="mail">E mail:</label>
+                    <input type="text" id="mail" name="email" th:field="*{email}"><br><br>
+                    <label for="pass">password:</label>
+                    <input type="text" id="pass" name="password" th:field="*{password}"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

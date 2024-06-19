@@ -18,13 +18,25 @@ public class UserController {
 
     }
 
-    @GetMapping
+    @GetMapping("/signUp")
     public String registry(Model model){
         model.addAttribute("User",new User());
-        return "registery";
+        return "signUp";
+    }
+
+    @GetMapping("/logIn")
+    public String login(Model model){
+        model.addAttribute("User",new User());
+        return "logIn";
     }
     @PostMapping("/registry")
     public String addUser(@ModelAttribute("User") User user){
+        userService.saveUserInfo(user);
+        return"save";
+    }
+
+    @PostMapping("/connection")
+    public String connectUser(@ModelAttribute("User") User user){
         userService.saveUserInfo(user);
         return"save";
     }

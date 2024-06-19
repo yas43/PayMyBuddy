@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     *{
+        padding: 0;
+        margin: 0;
+    }
+
+    html{
+        font-size: 62.5%;
+    }
+
+    body {
+  font-family: "Rubik", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: rgb(77, 68, 68);
+  background-color: rgb(200, 245, 230);
+}
+.navcontainer{
+    display: block;
+    
+}
+.navbar{
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5rem;
+    justify-content:end  
+}
+
+.middelcontainer{
+    padding-top: 10rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15rem;
+    justify-content:center  
+}
+
+.footer{
+    padding-top: 10rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15rem;
+    justify-content:center  
+}
+tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20rem;
+    padding-bottom: 7rem;
+}
+th{
+    padding-bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+</style>
+<body>
+    <div class="header">
+         <nav class="navcontainer">
+            <ul class="navbar">
+                <li>
+                    <a th:href="@{/transfers}">Home</a>
+                </li>
+                <li>
+                    <a  th:href="@{/transfers}">Transfer</a>
+                </li>
+                <li>
+                    <a  th:href="@{/profile}">Profile</a>
+                </li>
+                <li >
+                    <a>Contact</a>
+                </li>
+                <li>
+                    <a  th:href="@{/logout}">Log Off</a>
+                </li>
+            </ul>
+         </nav>
+    </div>
+    <div class="middel">
+       <div class="middelcontainer">
+            <div class="relation">
+                <label>séléctioner une relation</label>
+                <select>
+                    <option>relation1</option>
+                    <option>relation2</option>
+                    <option>relation3</option>
+                </select>
+            </div>
+            <div class="description">
+                <form action="#" method="posy">
+                    <label for="description">description:</label>
+                    <input type="text" id="description" name="desc"><br><br>
+                </form>
+            </div>
+            <div class="montant">
+                <label>séléctioner une amount</label>
+                <select>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>30</option>
+                    <option>40</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+            </div>
+            <div class="paye">
+                <button type="button">paye</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <table>
+            <thead>
+    <tr>
+        <th class="mestransaction">Mes Transactions</th>
+    </tr>
+    <tr class="tablerow">
+        <th>Relations</th>
+        <th>Description</th>
+        <th>Relations</th>
+    </tr>
+            </thead>
+            <tbody>
+    <tr>
+        <th>Laure-Anne</th>
+        <th>Restaurant</th>
+        <th>10€</th>
+    </tr>
+    <tr>
+        <th>Clara</th>
+        <th>Voyage</th>
+        <th>25€</th>
+    </tr>
+    <tr>
+        <th>Luc</th>
+        <th>Billets de cinéma</th>
+        <th>8€</th>
+    </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    
+   
+</div>
+</body>
+</html>
