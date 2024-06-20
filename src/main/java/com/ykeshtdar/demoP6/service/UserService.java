@@ -14,10 +14,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-//    public User saveUserInfo(User user){
-//
-//         return userRepository.save(user);
-//    }
+    public User saveUserInfo(User user){
+
+         return userRepository.save(user);
+    }
+
 //    public void updateUserInfo(){
 //
 //    }

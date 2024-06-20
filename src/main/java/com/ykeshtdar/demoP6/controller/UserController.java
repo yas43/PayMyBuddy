@@ -10,32 +10,31 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-//    private final UserService userService;
-//    private final TransactionService transactionService;
+    private final UserService userService;
+    private final TransactionService transactionService;
 //
 //
-//    public UserController(UserService userService, UserRepository userRepository, TransactionService transactionService) {
-//        this.userService = userService;
-//
-//        this.transactionService = transactionService;
-//    }
-//
-//    @GetMapping("/signUp")
-//    public String registry(Model model){
-//        model.addAttribute("User",new User());
-//        return "signUp";
-//    }
+    public UserController(UserService userService, UserRepository userRepository, TransactionService transactionService) {
+        this.userService = userService;
+        this.transactionService = transactionService;
+    }
+
+    @GetMapping("/signUp")
+    public String registry(Model model){
+        model.addAttribute("User",new User());
+        return "signUp";
+    }
 //
 //    @GetMapping("/logIn")
 //    public String login(Model model){
 //        model.addAttribute("User",new User());
 //        return "logIn";
 //    }
-//    @PostMapping("/registry")
-//    public String addUser(@ModelAttribute("User") User user){
-//        userService.saveUserInfo(user);
-//        return"save";
-//    }
+    @PostMapping("/registry")
+    public String addUser(@ModelAttribute("User") User user){
+        userService.saveUserInfo(user);
+        return"save";
+    }
 //
 //    @PostMapping("/connection")
 //    public String connectUser(@ModelAttribute("User") User user){
