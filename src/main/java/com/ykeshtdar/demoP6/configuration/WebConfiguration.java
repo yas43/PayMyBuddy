@@ -9,4 +9,5 @@ public class WebConfiguration {
     public HiddenHttpMethodFilter hiddenHttpMethodFilter(){
         return new HiddenHttpMethodFilter();
     }
+
 }

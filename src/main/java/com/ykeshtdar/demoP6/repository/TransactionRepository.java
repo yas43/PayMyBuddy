@@ -4,6 +4,7 @@ import com.ykeshtdar.demoP6.model.*;
 import com.ykeshtdar.demoP6.model.dto.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.*;
+import org.springframework.http.converter.json.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -23,11 +24,9 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
 
 
 
-    @Query(" SELECT t.sender.username, t.description, t.amount\n" +
+
+    @Query("SELECT new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.sender.username, t.description, t.amount) " +
             "FROM Transaction t " +
-            "JOIN t.sender senderUser " +
-            "JOIN t.receiver receiverUser " +
-            "WHERE senderUser.id = :senderId AND receiverUser.id = :receiverId AND t.receiver.id = receiverUser.id ")
-    List<TransactionHistory> findTransactions(@Param("senderId") Integer senderId,
-                                              @Param("receiverId") Integer receiverId);
+            "WHERE t.sender.id = :senderId AND t.receiver.id = :receiverId")
+    List<TransactionHistory> findTransactions(@Param("senderId") int senderId, @Param("receiverId") int receiverId);
 }

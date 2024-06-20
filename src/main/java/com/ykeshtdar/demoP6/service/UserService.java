@@ -3,6 +3,7 @@ package com.ykeshtdar.demoP6.service;
 import com.ykeshtdar.demoP6.model.*;
 import com.ykeshtdar.demoP6.model.dto.*;
 import com.ykeshtdar.demoP6.repository.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -12,18 +13,22 @@ public class UserService {
     private final UserRepository userRepository;
     private final TransactionRepository transactionRepository;
 
+
+    @Autowired
     public UserService(UserRepository userRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
         this.transactionRepository = transactionRepository;
     }
+
 
     public User saveUserInfo(User user){
 
          return userRepository.save(user);
     }
 
-    public List<TransactionHistory> displayCurrentUserTransactionHistory(){
-       return transactionRepository.findTransactions(3,1);
+    public List<TransactionHistory> displayCurrentUserTransactionHistory(int senderId,int receiverId){
+
+        return transactionRepository.findTransactions(senderId,receiverId);
     }
 
 //    public void updateUserInfo(){

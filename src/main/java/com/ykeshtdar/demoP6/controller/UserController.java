@@ -38,8 +38,14 @@ public class UserController {
 
 
     @GetMapping("/display")
-    public String displayhistory(Model model){
-        model.addAttribute(userService.displayCurrentUserTransactionHistory());
+    public String display(){
+//        model.addAttribute("transactionHistory",userService.displayCurrentUserTransactionHistory(senderId,receiverId));
+        return "comptpage";
+    }
+
+    @PostMapping("/display/user")
+    public String displayhistory(Model model,@RequestParam("senderId")int senderId,@RequestParam("receiverId")int receiverId){
+        model.addAttribute("TransactionHistory",userService.displayCurrentUserTransactionHistory(senderId,receiverId));
         return "comptpage";
     }
 

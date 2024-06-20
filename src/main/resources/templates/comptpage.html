@@ -72,7 +72,16 @@ th{
 
 </style>
 <body>
-    <div class="header">
+
+<form th:action="@{/user/display/user}"  th:method="post" class="inscription">
+    <label for="sender">enter senderId:</label>
+    <input type="text" id="sender" name="senderId"><br><br>
+    <label for="receive">enter receiverId:</label>
+    <input type="text" id="receive" name="receiverId"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+   <!-- <div class="header">
          <nav class="navcontainer">
             <ul class="navbar">
                 <li>
@@ -126,8 +135,7 @@ th{
         </div>
     </div>
     <div class="footer">
-
-
+-->
 
         <table>
             <thead>
