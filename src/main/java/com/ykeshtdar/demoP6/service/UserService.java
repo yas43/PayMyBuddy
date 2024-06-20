@@ -1,6 +1,7 @@
 package com.ykeshtdar.demoP6.service;
 
 import com.ykeshtdar.demoP6.model.*;
+import com.ykeshtdar.demoP6.model.dto.*;
 import com.ykeshtdar.demoP6.repository.*;
 import org.springframework.stereotype.*;
 
@@ -9,14 +10,20 @@ import java.util.*;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final TransactionRepository transactionRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     public User saveUserInfo(User user){
 
          return userRepository.save(user);
+    }
+
+    public List<TransactionHistory> displayCurrentUserTransactionHistory(){
+       return transactionRepository.findTransactions(3,1);
     }
 
 //    public void updateUserInfo(){

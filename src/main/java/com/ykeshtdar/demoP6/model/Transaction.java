@@ -15,6 +15,9 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "sender_id")
     User sender;
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
+    User receiver;
     @Column(name = "description")
     String description;
     @Column(name = "amount")

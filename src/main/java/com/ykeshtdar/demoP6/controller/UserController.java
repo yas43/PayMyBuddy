@@ -35,6 +35,14 @@ public class UserController {
         userService.saveUserInfo(user);
         return"save";
     }
+
+
+    @GetMapping("/display")
+    public String displayhistory(Model model){
+        model.addAttribute(userService.displayCurrentUserTransactionHistory());
+        return "comptpage";
+    }
+
 //
 //    @PostMapping("/connection")
 //    public String connectUser(@ModelAttribute("User") User user){

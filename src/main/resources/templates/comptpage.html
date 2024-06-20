@@ -104,7 +104,7 @@ th{
                 </select>
             </div>
             <div class="description">
-                <form action="#" method="posy">
+                <form action="#" method="post">
                     <label for="description">description:</label>
                     <input type="text" id="description" name="desc"><br><br>
                 </form>
@@ -126,35 +126,56 @@ th{
         </div>
     </div>
     <div class="footer">
+
+
+
         <table>
             <thead>
-    <tr>
-        <th class="mestransaction">Mes Transactions</th>
-    </tr>
-    <tr class="tablerow">
-        <th>Relations</th>
-        <th>Description</th>
-        <th>Relations</th>
-    </tr>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
             </thead>
             <tbody>
-    <tr>
-        <th>Laure-Anne</th>
-        <th>Restaurant</th>
-        <th>10€</th>
-    </tr>
-    <tr>
-        <th>Clara</th>
-        <th>Voyage</th>
-        <th>25€</th>
-    </tr>
-    <tr>
-        <th>Luc</th>
-        <th>Billets de cinéma</th>
-        <th>8€</th>
-    </tr>
+            <tr th:each="transactionHistory:${transactionHistory}">
+                <td th:text="${transactionHistory.receiver}"></td>
+                <td th:text="${transactionHistory.description}"></td>
+                <td th:text="${transactionHistory.amount}"></td>
+
+            </tr>
             </tbody>
         </table>
+
+<!--        <table>-->
+<!--            <thead>-->
+<!--    <tr>-->
+<!--        <th class="mestransaction">Mes Transactions</th>-->
+<!--    </tr>-->
+<!--    <tr class="tablerow">-->
+<!--        <th>Relations</th>-->
+<!--        <th>Description</th>-->
+<!--        <th>Relations</th>-->
+<!--    </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--    <tr>-->
+<!--        <th>Laure-Anne</th>-->
+<!--        <th>Restaurant</th>-->
+<!--        <th>10€</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <th>Clara</th>-->
+<!--        <th>Voyage</th>-->
+<!--        <th>25€</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <th>Luc</th>-->
+<!--        <th>Billets de cinéma</th>-->
+<!--        <th>8€</th>-->
+<!--    </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
     </div>
 
 
