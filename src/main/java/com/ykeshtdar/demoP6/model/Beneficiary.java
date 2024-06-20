@@ -14,8 +14,10 @@ public class Beneficiary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
-    @OneToMany(mappedBy = "receiver")
-    List<Transaction> transactionlist;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
+    User receiver;
     @Column(name = "username")
     String username;
     @Column(name = "email")

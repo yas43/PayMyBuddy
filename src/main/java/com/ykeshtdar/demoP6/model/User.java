@@ -23,6 +23,8 @@ public class User {
 
     @OneToMany(mappedBy = "sender")
     List<Transaction> transactionList;
+    @OneToMany(mappedBy = "receiver")
+    List<Beneficiary> beneficiaryList;
     @Column(name = "balance")
     float balance;
 

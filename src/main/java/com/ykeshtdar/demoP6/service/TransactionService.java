@@ -15,7 +15,7 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
-    public List<Transaction> displayTransaction(int receiverId, int senderId){
-       return transactionRepository.findTransactions(receiverId,senderId);
-    }
+//    public List<Transaction> displayTransaction(int receiverId, int senderId){
+//       return transactionRepository.findTransactions(receiverId,senderId);
+//    }
 }
