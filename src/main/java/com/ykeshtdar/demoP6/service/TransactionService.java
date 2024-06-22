@@ -2,6 +2,7 @@ package com.ykeshtdar.demoP6.service;
 
 import com.ykeshtdar.demoP6.model.*;
 import com.ykeshtdar.demoP6.repository.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -10,7 +11,7 @@ import java.util.*;
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
-
+    @Autowired
     public TransactionService(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
     }

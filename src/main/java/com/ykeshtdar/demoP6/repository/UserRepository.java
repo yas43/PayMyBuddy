@@ -9,4 +9,18 @@ import java.util.*;
 @Repository
 public interface UserRepository extends JpaRepository <User,Integer> {
 //     User findByUsername(String username);
+
+//    @Query(value = "select * from user",nativeQuery = true)
+//    List<User> findalluser();
+
+//    @Query( "select p from User p where p.username like'%yaser%'")
+//    List<User> findalluser();
+
+
+    @Query( "select p from User p ")
+    List<User> findalluser();
 }
+
+
+
+

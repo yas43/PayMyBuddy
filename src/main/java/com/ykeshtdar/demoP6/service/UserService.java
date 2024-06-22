@@ -2,9 +2,12 @@ package com.ykeshtdar.demoP6.service;
 
 import com.ykeshtdar.demoP6.model.*;
 import com.ykeshtdar.demoP6.model.dto.*;
+import com.ykeshtdar.demoP6.model.dto.TransactionHistory;
 import com.ykeshtdar.demoP6.repository.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -12,6 +15,10 @@ import java.util.*;
 public class UserService {
     private final UserRepository userRepository;
     private final TransactionRepository transactionRepository;
+
+
+
+
 
 
     @Autowired
@@ -26,10 +33,10 @@ public class UserService {
          return userRepository.save(user);
     }
 
-    public List<TransactionHistory> displayCurrentUserTransactionHistory(int senderId,int receiverId){
-
-        return transactionRepository.findTransactions(senderId,receiverId);
-    }
+//    public List<TransactionHistory> displayCurrentUserTransactionHistory(int senderId, int receiverId){
+//
+//        return transactionRepository.findTransactions(senderId,receiverId);
+//    }
 
 //    public void updateUserInfo(){
 //
@@ -103,5 +110,19 @@ public class UserService {
 //        }
 //        return currentUser;
 //    }
+
+    public List<User> showalluserusingquery(){
+        return userRepository.findalluser();
+    }
+//
+//    public List<TransactionHistory> showalltransaction(int sender_id){
+//        return  transactionRepository.findTransactionsByUsername(sender_id);
+//
+//    }
+
+    public List<Transaction> showalltransaction(){
+        return transactionRepository.findTransaction();
+    }
+
 
 }

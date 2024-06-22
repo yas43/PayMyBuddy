@@ -3,6 +3,7 @@ package com.ykeshtdar.demoP6.controller;
 import com.ykeshtdar.demoP6.model.*;
 import com.ykeshtdar.demoP6.repository.*;
 import com.ykeshtdar.demoP6.service.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +12,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
-    private final TransactionService transactionService;
+
+
 //
 //
-    public UserController(UserService userService, UserRepository userRepository, TransactionService transactionService) {
+    @Autowired
+    public UserController(UserService userService, TransactionService transactionService) {
         this.userService = userService;
-        this.transactionService = transactionService;
+
+
     }
 
     @GetMapping("/signUp")
@@ -37,17 +41,17 @@ public class UserController {
     }
 
 
-    @GetMapping("/display")
-    public String display(){
+//    @GetMapping("/display")
+//    public String display(){
 //        model.addAttribute("transactionHistory",userService.displayCurrentUserTransactionHistory(senderId,receiverId));
-        return "comptpage";
-    }
+//        return "comptpage";
+//    }
 
-    @PostMapping("/display/user")
-    public String displayhistory(Model model,@RequestParam("senderId")int senderId,@RequestParam("receiverId")int receiverId){
-        model.addAttribute("TransactionHistory",userService.displayCurrentUserTransactionHistory(senderId,receiverId));
-        return "comptpage";
-    }
+//    @PostMapping("/display/user")
+//    public String displayhistory(Model model,@RequestParam("senderId")int senderId,@RequestParam("receiverId")int receiverId){
+//        model.addAttribute("transactionHistory",userService.displayCurrentUserTransactionHistory(senderId,receiverId));
+//        return "comptpage";
+//    }
 
 //
 //    @PostMapping("/connection")
@@ -108,5 +112,31 @@ public class UserController {
 //        model.addAttribute("info",transactionService.displayTransaction(receiver_id,sender_id));
 //        return "comptpage";
 //    }
+
+        @GetMapping("/query")
+    public String showallusersuingquerttest(Model model){
+        model.addAttribute("user",userService.showalluserusingquery());
+        return "resulttemporary";
+    }
+
+
+
+//    @GetMapping("/query")
+//    public String showallusersuingquerttest(Model model){
+//        model.addAttribute("transaction",userService.showalltransaction(1));
+//        return "showalluser_tempo";
+//    }
+
+//        @GetMapping("/query")
+//    public String showallusersuingquerttest(Model model){
+//        model.addAttribute("transaction",userService.showalltransaction());
+//        return "showalltransaction_temporary";
+//    }
+
+@GetMapping("/transaction")
+    public String showtransaction(Model model){
+        model.addAttribute("transaction",userService.showalltransaction());
+        return "showalltransaction_temporary";
+}
 
 }
