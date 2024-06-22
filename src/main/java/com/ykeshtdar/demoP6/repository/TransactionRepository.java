@@ -46,4 +46,8 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
 @Query("select t FROM Transaction t ")
     List<Transaction> findTransaction();
 
+
+@Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id,t.receiver,t.description,t.amount) FROM TransactionHistory t ")
+    List<TransactionHistory> findAllTransactionHistory();
+
 }
