@@ -141,7 +141,7 @@ public class UserController {
 
 @GetMapping("/transactionhistory")
     public String showtransactionhistory(Model model){
-        model.addAttribute("transaction",userService.showalltransactionhistory());
+        model.addAttribute("transaction",userService.showalltransaction());
         return "transactionhistory_temporary";
 }
 

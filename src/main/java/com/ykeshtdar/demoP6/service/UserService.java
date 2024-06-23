@@ -120,11 +120,11 @@ public class UserService {
 //
 //    }
 
-    public List<Transaction> showalltransaction(){
-        return transactionRepository.findTransaction();
+    public List<TransactionHistory> showalltransaction(){
+        return transactionRepository.findTransactionsByUsername("yaser");
     }
 
-public List<TransactionHistory> showalltransactionhistory(){
-        return transactionRepository.findAllTransactionHistory();
-}
+//public TransactionHistory showalltransactionhistory(){
+//        return transactionRepository.findAllTransactionHistory();
+//}
 }

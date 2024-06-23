@@ -47,7 +47,18 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
     List<Transaction> findTransaction();
 
 
-@Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id,t.receiver,t.description,t.amount) FROM TransactionHistory t ")
-    List<TransactionHistory> findAllTransactionHistory();
+//@Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id,t.receiver,t.description,t.amount) FROM TransactionHistory t ")
+//    TransactionHistory findAllTransactionHistory();
+
+//    @Query("SELECT new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.sender, t.receiver, t.description, t.amount) " +
+//            "FROM Transaction t " +
+//            "JOIN User u ON t.receiver = u.id " +
+//            "WHERE u.username = :username")
+
+    @Query("SELECT new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id, t.receiver.username, t.description, t.amount) " +
+            "FROM Transaction t " +
+            "WHERE t.receiver.username = :username")
+    List<TransactionHistory> findTransactionsByUsername(@Param("username") String username);
+
 
 }
