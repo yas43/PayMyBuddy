@@ -127,4 +127,9 @@ public class UserService {
 //public TransactionHistory showalltransactionhistory(){
 //        return transactionRepository.findAllTransactionHistory();
 //}
+
+
+    public List<TransactionHistory> findalltransaction(){
+        return transactionRepository.findTransaction();
+    }
 }

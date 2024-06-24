@@ -17,7 +17,6 @@
     <tbody>
     <tr th:each="transaction:${transaction}">
         <td th:text="${transaction.id}"></td>
-        <td th:text="${transaction.sender}"></td>
         <td th:text="${transaction.receiver}"></td>
         <td th:text="${transaction.description}"></td>
         <td th:text="${transaction.amount}"></td>

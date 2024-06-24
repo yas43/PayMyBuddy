@@ -43,8 +43,26 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
 //    List<TransactionHistory> findTransactionsByUsername(@Param("sender_id") int sender_id);
 
 
-@Query("select t FROM Transaction t ")
-    List<Transaction> findTransaction();
+
+//temporary change to command in order to replace jpql query whit a join table to display dto object
+//@Query("select t FROM Transaction t ")
+//    List<Transaction> findTransaction();
+
+
+
+    // this is native query works on database should convert to jpql quarry:
+    // " SELECT t.sender_id,t.receiver_id, t.description, t.amount
+    //           FROM transaction t
+    //            JOIN user u ON t.receiver_id = u.id
+    //            WHERE t.sender_id = 1; "
+//    @Query(" SELECT new com.ykeshtdar.demoP6.model.dto.TransactionHistory " +
+//            "(t.sender AS sender_id, t.receiver AS receiver_id, t.description, t.amount)" +
+//            "FROM Transaction t" +
+//            "WHERE t.id = 1 ")
+    @Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id, t.receiver.username, t.description, t.amount)" +
+            "            FROM Transaction t  " +
+            "            WHERE t.sender.id= 1")
+    List<TransactionHistory> findTransaction();
 
 
 //@Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id,t.receiver,t.description,t.amount) FROM TransactionHistory t ")
