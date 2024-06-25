@@ -88,7 +88,7 @@
         
         <div class="body">
             <div class="bodycontainer">
-            <form th:action="@{/user/registry}" th:object="${User}" method="post" class="inscription">
+            <form th:action="@{/user/signUp}" th:object="${User}" method="post" class="inscription">
                 <label for="name">user name:</label>
                 <input type="text" id="name" name="username" th:field="*{username}"><br><br>
                 <label for="mail">mail:</label>

@@ -9,6 +9,7 @@ import java.util.*;
 @Repository
 public interface UserRepository extends JpaRepository <User,Integer> {
      User findByUsername(String username);
+     User findByEmail(String email);
 
 //    @Query(value = "select * from user",nativeQuery = true)
 //    List<User> findalluser();

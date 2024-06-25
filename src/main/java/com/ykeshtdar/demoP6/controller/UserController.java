@@ -29,14 +29,20 @@ public class UserController {
         return "signUp";
     }
 
+    @PostMapping("/signUp")
+    public String connectUser(@ModelAttribute("User") User user){
+        userService.saveUserInfo(user);
+        return"save";
+    }
+
     @GetMapping("/logIn")
-    public String login(Model model){
-        model.addAttribute("User",new User());
+    public String login(){
+//        model.addAttribute("User",new User());
         return "logIn";
     }
-    @PostMapping("/registry")
-    public String addUser(@ModelAttribute("User") User user){
-        userService.saveUserInfo(user);
+    @PostMapping("/logIn")
+    public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
+        userService.logIn(email);
         return"save";
     }
 
@@ -54,11 +60,7 @@ public class UserController {
 //    }
 
 //
-    @PostMapping("/connection")
-    public String connectUser(@ModelAttribute("User") User user){
-//        userService.saveUserInfo(user);
-        return"save";
-    }
+
 //    @GetMapping("/show")
 //    public String showalluser(Model model){
 //        model.addAttribute("user",userService.showAllUser());

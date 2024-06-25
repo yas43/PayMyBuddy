@@ -100,16 +100,16 @@ public class UserService {
 //       return userRepository.findByUsername(username);
 //    }
 
-//    public User loginuser(String username,String password){
-//        User currentUser = userRepository.findByUsername(username);
-//        if (currentUser != null){
-//            currentUser.setUsername(userRepository.findByUsername(username).getUsername());
-//        }
-//        else {
-//            throw new RuntimeException("user dose not exist");
-//        }
-//        return currentUser;
-//    }
+    public User logIn(String email){
+        User currentUser = userRepository.findByEmail(email);
+        if (currentUser.getPassword() != null ){
+            currentUser.setUsername(userRepository.findByEmail(email).getUsername());
+        }
+        else {
+            throw new RuntimeException("user dose not exist");
+        }
+        return currentUser;
+    }
 
 //    public List<User> showalluserusingquery(){
 //        return userRepository.findalluser();
