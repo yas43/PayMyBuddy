@@ -24,16 +24,16 @@ public class UserController {
     }
 
     @GetMapping("/signUp")
-    public String registry(Model model){
+    public String registerUser(Model model){
         model.addAttribute("User",new User());
         return "signUp";
     }
-//
-//    @GetMapping("/logIn")
-//    public String login(Model model){
-//        model.addAttribute("User",new User());
-//        return "logIn";
-//    }
+
+    @GetMapping("/logIn")
+    public String login(Model model){
+        model.addAttribute("User",new User());
+        return "logIn";
+    }
     @PostMapping("/registry")
     public String addUser(@ModelAttribute("User") User user){
         userService.saveUserInfo(user);
@@ -54,11 +54,11 @@ public class UserController {
 //    }
 
 //
-//    @PostMapping("/connection")
-//    public String connectUser(@ModelAttribute("User") User user){
+    @PostMapping("/connection")
+    public String connectUser(@ModelAttribute("User") User user){
 //        userService.saveUserInfo(user);
-//        return"save";
-//    }
+        return"save";
+    }
 //    @GetMapping("/show")
 //    public String showalluser(Model model){
 //        model.addAttribute("user",userService.showAllUser());
@@ -90,14 +90,14 @@ public class UserController {
 //        }
 //    }
 
-    @GetMapping("/find")
-    public String findByUsername(){
+//    @GetMapping("/find")
+//    public String findByUsername(){
 //        model.addAttribute("user",new User());
 //        User user = userService.findUserByUsername(username);
 //        model.addAttribute("user",user);
-        return "findusertemporary";
-
-    }
+//        return "findusertemporary";
+//
+//    }
 
 //    @PostMapping("/find/user")
 //    public String findByUsernameshow(@RequestParam("username") String username,Model model){
@@ -113,11 +113,11 @@ public class UserController {
 //        return "comptpage";
 //    }
 
-        @GetMapping("/query")
-    public String showallusersuingquerttest(Model model){
-        model.addAttribute("user",userService.showalluserusingquery());
-        return "resulttemporary";
-    }
+//        @GetMapping("/query")
+//    public String showallusersuingquerttest(Model model){
+//        model.addAttribute("user",userService.showalluserusingquery());
+//        return "resulttemporary";
+//    }
 
 
 
@@ -133,22 +133,31 @@ public class UserController {
 //        return "showalltransaction_temporary";
 //    }
 
-@GetMapping("/transaction")
-    public String showtransaction(Model model){
-        model.addAttribute("transaction",userService.showalltransaction());
-        return "showalltransaction_temporary";
-}
+//@GetMapping("/transaction")
+//    public String showtransaction(Model model){
+//        model.addAttribute("transaction",userService.showalltransaction());
+//        return "showalltransaction_temporary";
+//}
 
-@GetMapping("/transactionhistory")
-    public String showtransactionhistory(Model model){
-        model.addAttribute("transaction",userService.showalltransaction());
-        return "transactionhistory_temporary";
-}
-
+//@GetMapping("/transactionhistory")
+//    public String showtransactionhistory(Model model){
+//        model.addAttribute("transaction",userService.showalltransaction());
+//        return "transactionhistory_temporary";
+//}
+//
 @GetMapping("/alltransaction")
-    public String showalltarnsaction(Model model){
-        model.addAttribute("transaction",userService.findalltransaction());
-        return "showalltransaction_temporary";
+    public String showalltarnsaction(){
+//        model.addAttribute("transaction",userService.findalltransaction(1,3));
+//        return "showalltransaction_temporary";
+    return "comptpage";
+}
+
+@PostMapping("/alltransaction")
+    public String displayalltransaction(Model model,@RequestParam("senderId") int senderId,@RequestParam("receiverId") int reciverId){
+    System.out.println("senderId is :"+senderId);
+    System.out.println("receiverId is "+reciverId);
+        model.addAttribute("transaction",userService.findalltransaction(senderId,reciverId));
+        return "comptpage";
 }
 
 }

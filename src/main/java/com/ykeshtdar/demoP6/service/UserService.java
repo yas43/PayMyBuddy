@@ -63,9 +63,9 @@ public class UserService {
 //    }
 
 //    public User updateuser(User user,int id){
-
+//
 //        int id =userRepository.findByUsername(user.getUsername()).getId();
-
+//
 //      User user = userRepository.findById(id);
 //        Optional<User> optional = userRepository.findById(id);
 //        User actualuser = null;
@@ -111,25 +111,28 @@ public class UserService {
 //        return currentUser;
 //    }
 
-    public List<User> showalluserusingquery(){
-        return userRepository.findalluser();
-    }
+//    public List<User> showalluserusingquery(){
+//        return userRepository.findalluser();
+//    }
 //
 //    public List<TransactionHistory> showalltransaction(int sender_id){
 //        return  transactionRepository.findTransactionsByUsername(sender_id);
 //
 //    }
 
-    public List<TransactionHistory> showalltransaction(){
-        return transactionRepository.findTransactionsByUsername("yaser");
-    }
+//    public List<TransactionHistory> showalltransaction(){
+//        return transactionRepository.findTransactionsByUsername("yaser");
+//    }
 
 //public TransactionHistory showalltransactionhistory(){
 //        return transactionRepository.findAllTransactionHistory();
 //}
 
 
-    public List<TransactionHistory> findalltransaction(){
-        return transactionRepository.findTransaction();
+    public List<TransactionHistory> findalltransaction(int senderId,int receiverId){
+        return transactionRepository.findTransaction(senderId,receiverId);
     }
+
+
+
 }

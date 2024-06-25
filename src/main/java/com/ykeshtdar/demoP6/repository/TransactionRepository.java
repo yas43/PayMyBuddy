@@ -59,10 +59,11 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
 //            "(t.sender AS sender_id, t.receiver AS receiver_id, t.description, t.amount)" +
 //            "FROM Transaction t" +
 //            "WHERE t.id = 1 ")
-    @Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id, t.receiver.username, t.description, t.amount)" +
+    @Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id ,t.receiver.username, t.description, t.amount)" +
             "            FROM Transaction t  " +
-            "            WHERE t.sender.id= 1")
-    List<TransactionHistory> findTransaction();
+            "            WHERE (t.sender.id= :sender_id " +
+            "            AND t.receiver.id= :receiver_id )")
+    List<TransactionHistory> findTransaction(@Param("sender_id")int sender_id,@Param("receiver_id")int receiver_id);
 
 
 //@Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id,t.receiver,t.description,t.amount) FROM TransactionHistory t ")
@@ -73,10 +74,10 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
 //            "JOIN User u ON t.receiver = u.id " +
 //            "WHERE u.username = :username")
 
-    @Query("SELECT new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id, t.receiver.username, t.description, t.amount) " +
-            "FROM Transaction t " +
-            "WHERE t.receiver.username = :username")
-    List<TransactionHistory> findTransactionsByUsername(@Param("username") String username);
+//    @Query("SELECT new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id,t.receiver.username, t.description, t.amount) " +
+//            "FROM Transaction t " +
+//            "WHERE t.receiver.username = :username")
+//    List<TransactionHistory> findTransactionsByUsername(@Param("username") String username);
 
 
 }

@@ -11,11 +11,12 @@ public class TransactionHistory {
 
     int id;
 
+
     String receiver;
 
     String description;
 
-    Float amount;
+    float amount;
 
 
 

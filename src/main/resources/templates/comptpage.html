@@ -73,13 +73,23 @@ th{
 </style>
 <body>
 
-<form th:action="@{/user/display/user}"  th:method="post" class="inscription">
+<form th:action="@{/user/alltransaction}"  th:method="post" class="inscription">
+    <label for="sender">enter senderId:</label>
+    <input type="text" id="sender" name="senderId"><br><br>
+    <label for="receive">enter receiverId:</label>
+    <input type="text" id="receive" name="receiverId"><br><br>
+    <div class="btn">
+        <input type="submit" value="Submit" >
+    </div>
+</form>
+
+<!--<form th:action="@{/user/display/user}"  th:method="post" class="inscription">
     <label for="sender">enter senderId:</label>
     <input type="text" id="sender" name="senderId"><br><br>
     <label for="receive">enter receiverId:</label>
     <input type="text" id="receive" name="receiverId"><br><br>
     <input type="submit" value="Submit">
-</form>
+</form>-->
 
    <!-- <div class="header">
          <nav class="navcontainer">
@@ -146,10 +156,10 @@ th{
             </tr>
             </thead>
             <tbody>
-            <tr th:each="transactionHistory:${transactionHistory}">
-                <td th:text="${transactionHistory.receiver}"></td>
-                <td th:text="${transactionHistory.description}"></td>
-                <td th:text="${transactionHistory.amount}"></td>
+            <tr th:each="transaction:${transaction}">
+                <td th:text="${transaction.receiver}"></td>
+                <td th:text="${transaction.description}"></td>
+                <td th:text="${transaction.amount}"></td>
 
             </tr>
             </tbody>
