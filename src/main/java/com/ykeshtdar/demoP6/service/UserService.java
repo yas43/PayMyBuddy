@@ -62,28 +62,29 @@ public class UserService {
 //        return user;
 //    }
 
-//    public User updateuser(User user,int id){
-//
-//        int id =userRepository.findByUsername(user.getUsername()).getId();
-//
-//      User user = userRepository.findById(id);
-//        Optional<User> optional = userRepository.findById(id);
-//        User actualuser = null;
-////        User actualuser = new User();
-//        if (optional.isPresent()){
-//
-//            actualuser = optional.get();
-//
-//            actualuser.setUsername(user.getUsername());
-//            actualuser.setPassword(user.getPassword());
-//            actualuser.setEmail(user.getEmail());
-//        }
-//        else {
-//            throw new RuntimeException("user do not exist");
-//        }
-//        return user;
+    public User updateuser(User user){
+
+        int id =userRepository.findByUsername(user.getUsername()).getId();
+
+//      User actueluser = userRepository.findById(id);
+        Optional<User> optional = Optional.ofNullable(userRepository.findById(id));
+        User actualuser = null;
+//        User actualuser = new User();
+        if (optional.isPresent()){
+
+            actualuser = optional.get();
+
+            actualuser.setUsername(user.getUsername());
+            actualuser.setPassword(user.getPassword());
+            actualuser.setEmail(user.getEmail());
+            userRepository.save(actualuser);
+        }
+        else {
+            throw new RuntimeException("user do not exist");
+        }
+        return user;
 //        return userRepository.save(actualuser);
-//    }
+    }
 
 //    public User callUserById(int id){
 //       Optional<User> optional = userRepository.findById(id);

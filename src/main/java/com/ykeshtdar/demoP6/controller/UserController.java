@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final UserRepository userRepository;
 
 
-//
-//
     @Autowired
-    public UserController(UserService userService, TransactionService transactionService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
-
-
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/signUp")
@@ -47,110 +45,23 @@ public class UserController {
     }
 
 
-//    @GetMapping("/display")
-//    public String display(){
-//        model.addAttribute("transactionHistory",userService.displayCurrentUserTransactionHistory(senderId,receiverId));
-//        return "comptpage";
-//    }
+        @GetMapping("/modify")
+    public String showcurrentuserinfo(Model model){
+        int id = 1;
+        model.addAttribute("user",userRepository.findById(id) );
+        return "modifyinfo";
+    }
 
-//    @PostMapping("/display/user")
-//    public String displayhistory(Model model,@RequestParam("senderId")int senderId,@RequestParam("receiverId")int receiverId){
-//        model.addAttribute("transactionHistory",userService.displayCurrentUserTransactionHistory(senderId,receiverId));
-//        return "comptpage";
-//    }
-
-//
-
-//    @GetMapping("/show")
-//    public String showalluser(Model model){
-//        model.addAttribute("user",userService.showAllUser());
-//        model.addAttribute("user",userService.callyaser_temp());
-//        return "showallusertemporary";
-//    }
-
-//        @GetMapping("/modify")
-//    public String showalluser(Model model){
-//        int id = userService.loginuser("yaser","123456").getId();
-//        model.addAttribute("user",userService.callUserById(id));
-//        return "modifyinfo";
-//    }
-
-//    @PutMapping("/update")
-//    public String update(@ModelAttribute ("User") User user){
-//        int id = userService.loginuser("yaser","123456").getId();
-//        if (user.getEmail() != null && user.getUsername() != null && user.getPassword() != null) {
-//             userService.findUserByUsername(user.getUsername()).getId();
-//            userService.callUserById();
-//            int id = userService.findUserByUsername(user.getUsername()).getId();
-//            userService.updateuser(user,id);
-//
-//
-//            return "save";
-//        }
-//        else {
-//            throw new RuntimeException("fill all the fields please");
-//        }
-//    }
-
-//    @GetMapping("/find")
-//    public String findByUsername(){
-//        model.addAttribute("user",new User());
-//        User user = userService.findUserByUsername(username);
-//        model.addAttribute("user",user);
-//        return "findusertemporary";
-//
-//    }
-
-//    @PostMapping("/find/user")
-//    public String findByUsernameshow(@RequestParam("username") String username,Model model){
-//        User user = userService.findUserByUsername(username);
-//        model.addAttribute("user",user);
-//        return "resulttemporary";
-//
-//    }
-
-//    @GetMapping("/display")
-//    public String displayinfo(@RequestParam int receiver_id,int sender_id,Model model){
-//        model.addAttribute("info",transactionService.displayTransaction(receiver_id,sender_id));
-//        return "comptpage";
-//    }
-
-//        @GetMapping("/query")
-//    public String showallusersuingquerttest(Model model){
-//        model.addAttribute("user",userService.showalluserusingquery());
-//        return "resulttemporary";
-//    }
+    @PutMapping("/modify")
+    public String update(@ModelAttribute ("User") User user){
+            userService.updateuser(user);
+            return "save";
+    }
 
 
 
-//    @GetMapping("/query")
-//    public String showallusersuingquerttest(Model model){
-//        model.addAttribute("transaction",userService.showalltransaction(1));
-//        return "showalluser_tempo";
-//    }
-
-//        @GetMapping("/query")
-//    public String showallusersuingquerttest(Model model){
-//        model.addAttribute("transaction",userService.showalltransaction());
-//        return "showalltransaction_temporary";
-//    }
-
-//@GetMapping("/transaction")
-//    public String showtransaction(Model model){
-//        model.addAttribute("transaction",userService.showalltransaction());
-//        return "showalltransaction_temporary";
-//}
-
-//@GetMapping("/transactionhistory")
-//    public String showtransactionhistory(Model model){
-//        model.addAttribute("transaction",userService.showalltransaction());
-//        return "transactionhistory_temporary";
-//}
-//
 @GetMapping("/alltransaction")
     public String showalltarnsaction(){
-//        model.addAttribute("transaction",userService.findalltransaction(1,3));
-//        return "showalltransaction_temporary";
     return "comptpage";
 }
 
