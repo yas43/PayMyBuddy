@@ -11,7 +11,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         boolean isUser =authentication.getAuthorities().stream()
-                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_USER"));
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_user"));
 
         if (isUser){
             setDefaultTargetUrl("/comptpage");

@@ -17,7 +17,7 @@ public class UserRegistryController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping
+    @PostMapping("/user")
     public User adduser(@RequestBody User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);

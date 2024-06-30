@@ -16,26 +16,27 @@ import org.springframework.security.web.*;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-    @Autowired
-    private CustomUserDetailService customUserDetailService;
+
+    private final CustomUserDetailService customUserDetailService;
+
+    public SecurityConfiguration(CustomUserDetailService customUserDetailService) {
+        this.customUserDetailService = customUserDetailService;
+    }
 
 
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
       return   httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(registry->{
-            registry.requestMatchers("/signUp","/logIn");
-            registry.anyRequest().authenticated();
+                .authorizeHttpRequests(
+                        registry->{
+                                   registry.requestMatchers("/**").permitAll();
+                                   registry.anyRequest().authenticated();
         })
-                .formLogin(httpSecurityFormLoginConfigurer -> {
-                    httpSecurityFormLoginConfigurer.loginPage("logIn")
-                            .successHandler(new AuthenticationSuccessHandler())
-                            .permitAll();
-
-                })
-                .build();
-
-
+//                .formLogin(httpSecurityFormLoginConfigurer ->
+//                    httpSecurityFormLoginConfigurer.loginPage("logIn")
+//                            .successHandler(new AuthenticationSuccessHandler())
+//                            .permitAll())
+              .build();
 
     }
 
