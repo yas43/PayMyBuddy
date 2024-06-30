@@ -1,10 +1,12 @@
 package com.ykeshtdar.demoP6.service;
 
 import com.ykeshtdar.demoP6.model.*;
+import com.ykeshtdar.demoP6.model.User;
 import com.ykeshtdar.demoP6.model.dto.*;
 import com.ykeshtdar.demoP6.model.dto.TransactionHistory;
 import com.ykeshtdar.demoP6.repository.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -64,7 +66,12 @@ public class UserService {
 
     public User updateuser(User user){
 
-        int id =userRepository.findByUsername(user.getUsername()).getId();
+        User user1 = userRepository.findByUsername(user.getUsername())
+                .orElseThrow(()->new UsernameNotFoundException("there is no this user"));
+
+        int id = user1.getId();
+
+//        int id =userRepository.findByUsername(user.getUsername()).getId();
 
 //      User actueluser = userRepository.findById(id);
         Optional<User> optional = Optional.ofNullable(userRepository.findById(id));
