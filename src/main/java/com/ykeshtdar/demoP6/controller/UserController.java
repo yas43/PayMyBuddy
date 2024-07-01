@@ -33,12 +33,12 @@ public class UserController {
         return"save";
     }
 
-    @GetMapping("/logIn")
+    @GetMapping("/login")
     public String login(){
 //        model.addAttribute("User",new User());
         return "logIn";
     }
-    @PostMapping("/logIn")
+    @PostMapping("/login")
     public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
         userService.logIn(email);
         return"save";

@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/registry")
+@RequestMapping("registry")
 public class UserRegistryController {
     private final UserRepository userRepository;
    @Autowired

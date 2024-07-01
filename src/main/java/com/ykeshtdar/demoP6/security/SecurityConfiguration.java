@@ -19,11 +19,13 @@ public class SecurityConfiguration {
 
     private final CustomUserDetailService customUserDetailService;
 
+    @Autowired
     public SecurityConfiguration(CustomUserDetailService customUserDetailService) {
         this.customUserDetailService = customUserDetailService;
     }
 
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
       return   httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
@@ -32,10 +34,11 @@ public class SecurityConfiguration {
                                    registry.requestMatchers("/**").permitAll();
                                    registry.anyRequest().authenticated();
         })
-//                .formLogin(httpSecurityFormLoginConfigurer ->
-//                    httpSecurityFormLoginConfigurer.loginPage("logIn")
-//                            .successHandler(new AuthenticationSuccessHandler())
-//                            .permitAll())
+                .formLogin(httpSecurityFormLoginConfigurer ->
+                    httpSecurityFormLoginConfigurer
+                            .loginPage("/login")
+                            .successHandler(new AuthenticationSuccessHandler())
+                            .permitAll())
               .build();
 
     }

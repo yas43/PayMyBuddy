@@ -17,7 +17,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
             setDefaultTargetUrl("/comptpage");
         }
         else {
-            setDefaultTargetUrl("/logIn");
+            setDefaultTargetUrl("/save");
         }
         super.onAuthenticationSuccess(request, response, authentication);
     }

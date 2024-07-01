@@ -6,6 +6,7 @@ import com.ykeshtdar.demoP6.model.dto.*;
 import com.ykeshtdar.demoP6.model.dto.TransactionHistory;
 import com.ykeshtdar.demoP6.repository.*;
 import org.springframework.beans.factory.annotation.*;
+//import org.springframework.security.core.userdetails.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -90,7 +91,7 @@ public class UserService {
             throw new RuntimeException("user do not exist");
         }
         return user;
-//        return userRepository.save(actualuser);
+
     }
 
 //    public User callUserById(int id){
