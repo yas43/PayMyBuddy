@@ -110,14 +110,18 @@ public class UserService {
 //    }
 
     public User logIn(String email){
-        User currentUser = userRepository.findByEmail(email);
-        if (currentUser.getPassword() != null ){
-            currentUser.setUsername(userRepository.findByEmail(email).getUsername());
+        Optional<User>optional = userRepository.findByEmail(email);
+         User user = null;
+
+
+        if (optional.isPresent() ){
+            user = optional.get();
         }
         else {
             throw new RuntimeException("user dose not exist");
         }
-        return currentUser;
+        return user;
+
     }
 
 //    public List<User> showalluserusingquery(){

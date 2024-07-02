@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
+    private final CustomUserDetailService customUserDetailService;
 
 
     @Autowired
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService, UserRepository userRepository, CustomUserDetailService customUserDetailService) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.customUserDetailService = customUserDetailService;
     }
 
     @GetMapping("/signUp")
@@ -40,8 +42,14 @@ public class UserController {
     }
     @PostMapping("/login")
     public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
-        userService.logIn(email);
+//        userService.logIn(email);
+        customUserDetailService.loadUserByUsername(email);
         return"save";
+    }
+
+    @GetMapping("/welcome")
+    public  String welcome(){
+        return "welcome";
     }
 
 

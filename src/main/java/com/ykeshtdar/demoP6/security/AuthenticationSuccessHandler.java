@@ -11,13 +11,13 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         boolean isUser =authentication.getAuthorities().stream()
-                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_user"));
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_USER"));
 
         if (isUser){
-            setDefaultTargetUrl("/comptpage");
+            setDefaultTargetUrl("/user/welcome");
         }
         else {
-            setDefaultTargetUrl("/save");
+            setDefaultTargetUrl("/user/welcome");
         }
         super.onAuthenticationSuccess(request, response, authentication);
     }

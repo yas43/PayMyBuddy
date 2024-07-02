@@ -25,7 +25,7 @@ public class User {
     @Column(name = "password")
     String password;
     @Column(name = "role" )
-    String role ="user";
+    String role ;
 
     @OneToMany(mappedBy = "sender")
     List<Transaction> transactionList;

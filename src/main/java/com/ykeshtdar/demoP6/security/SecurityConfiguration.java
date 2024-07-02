@@ -31,14 +31,19 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         registry->{
-                                   registry.requestMatchers("/**").permitAll();
+                                   registry.requestMatchers("/user/welcome","/registry/user").permitAll();
+//                                   registry.requestMatchers("/user/welcome").hasRole("USER");
                                    registry.anyRequest().authenticated();
         })
-                .formLogin(httpSecurityFormLoginConfigurer ->
-                    httpSecurityFormLoginConfigurer
-                            .loginPage("/login")
-                            .successHandler(new AuthenticationSuccessHandler())
-                            .permitAll())
+                .formLogin(httpSecurityFormLoginConfigurer -> {
+                            httpSecurityFormLoginConfigurer
+                                    .loginPage("/user/login")
+                                    .loginProcessingUrl("/user/logIn")
+                                    .usernameParameter("email")
+                                    .passwordParameter("password")
+                                    .successHandler(new AuthenticationSuccessHandler())
+                                    .permitAll();
+                })
               .build();
 
     }
