@@ -1,9 +1,14 @@
 package com.ykeshtdar.demoP6.controller;
 
 import com.ykeshtdar.demoP6.model.*;
+import com.ykeshtdar.demoP6.model.User;
 import com.ykeshtdar.demoP6.repository.*;
 import com.ykeshtdar.demoP6.service.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.*;
+import org.springframework.security.core.context.*;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -53,11 +58,22 @@ public class UserController {
     }
 
 
-        @GetMapping("/modify")
+    @GetMapping("/modify")
     public String showcurrentuserinfo(Model model){
-        int id = 1;
-        model.addAttribute("user",userRepository.findById(id) );
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+            UserDetails userDetails = (UserDetails) principal;
+        System.out.println(userDetails.getUsername());
+//        System.out.println(userRepository.findByEmail(userDetails.getUsername()));
+var user = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(()->new UsernameNotFoundException("user did not found"));
+        model.addAttribute("user",user);
         return "modifyinfo";
+
+//        int id = 2;
+//        model.addAttribute("user",userRepository.findById(id) );
+//        return "modifyinfo";
     }
 
     @PutMapping("/modify")
