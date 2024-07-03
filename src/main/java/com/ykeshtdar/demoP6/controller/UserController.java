@@ -97,4 +97,9 @@ var user = userRepository.findByEmail(userDetails.getUsername())
         return "comptpage";
 }
 
+@GetMapping("/addbeneficiary")
+    public String addbeneficiary(){
+        return "addBeneficiary";
+}
+
 }
