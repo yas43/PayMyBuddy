@@ -3,6 +3,8 @@ package com.ykeshtdar.demoP6.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.*;
+
 @Entity
 @Table(name = "transaction")
 @Getter
@@ -24,5 +26,7 @@ public class Transaction {
     float amount;
     @Column(name = "fee")
     float fee;
+    @Column(name = "date")
+    LocalDateTime date;
 
 }

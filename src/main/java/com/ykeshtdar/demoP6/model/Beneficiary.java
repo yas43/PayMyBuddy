@@ -3,6 +3,7 @@ package com.ykeshtdar.demoP6.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.*;
 import java.util.*;
 
 @Entity
@@ -24,6 +25,8 @@ public class Beneficiary {
     String email;
     @Column(name = "amount")
     float amount;
+    @Column(name = "date")
+    LocalDateTime date;
 
 
 

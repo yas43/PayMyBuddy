@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         registry->{
-                                   registry.requestMatchers("/user/welcome","/registry/user").permitAll();
+                                   registry.requestMatchers("/user/welcome","/registry/user","registry/{userId}/friend/{friendId}").permitAll();
 //                                   registry.requestMatchers("/user/welcome").hasRole("USER");
                                    registry.anyRequest().authenticated();
         })

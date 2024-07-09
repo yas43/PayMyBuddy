@@ -8,18 +8,26 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("registry")
-public class UserRegistryController {
+public class UserRegistryRestController {
     private final UserRepository userRepository;
    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserRegistryController(UserRepository userRepository) {
+    public UserRegistryRestController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @PostMapping("/user")
     public User adduser(@RequestBody User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println("hello i am here"+user.getEmail());
+        return userRepository.save(user);
+    }
+    @PutMapping("/{userId}/friend/{friendId}")
+    public User addFriend(@PathVariable int userId,@PathVariable int friendId){
+        User user = userRepository.findById(userId);
+        User friend = userRepository.findById(friendId);
+        user.getUserSet().add(friend);
         return userRepository.save(user);
     }
 }

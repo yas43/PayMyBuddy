@@ -26,7 +26,13 @@ public class User {
     String password;
     @Column(name = "role" )
     String role ;
-
+    @OneToMany
+    @JoinTable(
+            name = "friend",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "friend_id")
+    )
+    Set<User>userSet = new HashSet<>();
     @OneToMany(mappedBy = "sender")
     List<Transaction> transactionList;
     @OneToMany(mappedBy = "receiver")
