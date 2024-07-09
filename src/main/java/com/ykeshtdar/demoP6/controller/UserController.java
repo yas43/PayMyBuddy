@@ -61,15 +61,16 @@ public class UserController {
     @GetMapping("/modify")
     public String showcurrentuserinfo(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-
+            Object principal = authentication.getPrincipal();
             UserDetails userDetails = (UserDetails) principal;
-        System.out.println(userDetails.getUsername());
+            System.out.println(userDetails.getUsername());
+
 //        System.out.println(userRepository.findByEmail(userDetails.getUsername()));
 var user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(()->new UsernameNotFoundException("user did not found"));
         model.addAttribute("user",user);
         return "modifyinfo";
+
 
 //        int id = 2;
 //        model.addAttribute("user",userRepository.findById(id) );
@@ -97,9 +98,33 @@ var user = userRepository.findByEmail(userDetails.getUsername())
         return "comptpage";
 }
 
-@GetMapping("/addbeneficiary")
-    public String addbeneficiary(){
+@GetMapping("addbeneficiary")
+public String addbeneficiary(){
         return "addBeneficiary";
+}
+
+
+
+
+
+@PutMapping("/addbeneficiary")
+    public String addbeneficiary(@RequestParam("email") String email){
+        User beneficiary = userRepository.findByEmail(email)
+                .orElseThrow(()->new UsernameNotFoundException("this email dose not exist"));
+    System.out.println("beneficiary email is"+beneficiary.getEmail());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principle = authentication.getPrincipal();
+        UserDetails userDetails = (UserDetails) principle;
+       User user = userRepository.findByEmail(userDetails.getUsername())
+               .orElseThrow(()->new UsernameNotFoundException("user did not find"));
+    System.out.println("user email is "+user.getEmail());
+       user.getUserSet().add(beneficiary);
+    System.out.println(user.getUserSet());
+       userRepository.save(user);
+      return "save";
+
+
 }
 
 }
