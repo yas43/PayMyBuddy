@@ -1,10 +1,13 @@
 package com.ykeshtdar.demoP6.controller;
 
 import com.ykeshtdar.demoP6.model.*;
+import com.ykeshtdar.demoP6.model.dto.*;
 import com.ykeshtdar.demoP6.repository.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("registry")
@@ -43,6 +46,10 @@ public class UserRegistryRestController {
         transaction.setReceiver(receiverUser);
         return transactionRepository.save(transaction);
 
+    }
+    @GetMapping("{senderId}/alltransaction/{receiverId}")
+    public List<TransactionHistory> showAllTransaction(@PathVariable int senderId, @PathVariable int receiverId){
+        return  transactionRepository.findTransaction(senderId,receiverId);
     }
 }
 
