@@ -25,7 +25,7 @@ public class UserRegistryRestController {
     @PostMapping("/user")
     public User adduser(@RequestBody User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println("hello i am here"+user.getEmail());
+//        System.out.println("hello i am here"+user.getEmail());
         return userRepository.save(user);
     }
     @PutMapping("/{userId}/friend/{friendId}")
@@ -39,8 +39,8 @@ public class UserRegistryRestController {
     public Transaction addTransaction(@PathVariable int senderId,@PathVariable int receiverId){
         User senderUser = userRepository.findById(senderId);
         User receiverUser = userRepository.findById(receiverId);
-        System.out.println("sender name = "+senderUser.getUsername());
-        System.out.println("receiver name = "+receiverUser.getUsername());
+//        System.out.println("sender name = "+senderUser.getUsername());
+//        System.out.println("receiver name = "+receiverUser.getUsername());
         Transaction transaction = new Transaction();
         transaction.setSender(senderUser);
         transaction.setReceiver(receiverUser);

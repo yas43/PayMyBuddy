@@ -15,6 +15,7 @@ import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.regex.*;
 
 @Service
 public class UserService {
@@ -34,8 +35,12 @@ public class UserService {
 
 
     public User saveUserInfo(User user){
-
-         return userRepository.save(user);
+        if (isValidEmail( user.getEmail()) && !isExistAlready(user.getEmail())) {
+            return userRepository.save(user);
+        }
+        else {
+            throw new RuntimeException("email is not valid or already exist");
+        }
     }
 
 //    public List<TransactionHistory> displayCurrentUserTransactionHistory(int senderId, int receiverId){
@@ -159,6 +164,23 @@ public class UserService {
 
         user.getUserSet().add(beneficiary);
         return userRepository.save(user);
+
+    }
+
+    private boolean isValidEmail(String email){
+        Pattern pattern = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$");
+        Matcher match = pattern.matcher(email);
+        return match.hasMatch();
+
+    }
+    private boolean isExistAlready(String email){
+        Optional<User>optional = userRepository.findByEmail(email);
+        if (optional.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
 
     }
 
