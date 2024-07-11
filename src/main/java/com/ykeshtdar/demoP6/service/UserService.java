@@ -159,11 +159,17 @@ public class UserService {
         User user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(()->new UsernameNotFoundException("user did not find"));
 
-        User beneficiary = userRepository.findByEmail(email)
-                .orElseThrow(()->new UsernameNotFoundException("this email dose not exist"));
+        if (isValidEmail(email) && isExistAlready(email) && !(user.getEmail().equals(email))) {
 
-        user.getUserSet().add(beneficiary);
-        return userRepository.save(user);
+            User beneficiary = userRepository.findByEmail(email)
+                    .orElseThrow(() -> new UsernameNotFoundException("this email dose not exist"));
+
+            user.getUserSet().add(beneficiary);
+            return userRepository.save(user);
+        }
+        else {
+            throw new RuntimeException("this email is not valid");
+        }
 
     }
 
