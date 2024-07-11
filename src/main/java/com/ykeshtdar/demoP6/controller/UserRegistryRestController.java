@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("registry")
 public class UserRegistryRestController {
     private final UserRepository userRepository;
+    private final TransactionRepository transactionRepository;
    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserRegistryRestController(UserRepository userRepository) {
+    public UserRegistryRestController(UserRepository userRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     @PostMapping("/user")
@@ -29,6 +31,18 @@ public class UserRegistryRestController {
         User friend = userRepository.findById(friendId);
         user.getUserSet().add(friend);
         return userRepository.save(user);
+    }
+    @PutMapping("{senderId}/receiver/{receiverId}")
+    public Transaction addTransaction(@PathVariable int senderId,@PathVariable int receiverId){
+        User senderUser = userRepository.findById(senderId);
+        User receiverUser = userRepository.findById(receiverId);
+        System.out.println("sender name = "+senderUser.getUsername());
+        System.out.println("receiver name = "+receiverUser.getUsername());
+        Transaction transaction = new Transaction();
+        transaction.setSender(senderUser);
+        transaction.setReceiver(receiverUser);
+        return transactionRepository.save(transaction);
+
     }
 }
 

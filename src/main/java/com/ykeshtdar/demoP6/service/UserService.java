@@ -7,6 +7,8 @@ import com.ykeshtdar.demoP6.model.dto.TransactionHistory;
 import com.ykeshtdar.demoP6.repository.*;
 import org.springframework.beans.factory.annotation.*;
 //import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.*;
+import org.springframework.security.core.context.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -144,6 +146,20 @@ public class UserService {
 
     public List<TransactionHistory> findalltransaction(int senderId,int receiverId){
         return transactionRepository.findTransaction(senderId,receiverId);
+    }
+    public User addBeneficiary(String email){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principle = authentication.getPrincipal();
+        UserDetails userDetails = (UserDetails) principle;
+        User user = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(()->new UsernameNotFoundException("user did not find"));
+
+        User beneficiary = userRepository.findByEmail(email)
+                .orElseThrow(()->new UsernameNotFoundException("this email dose not exist"));
+
+        user.getUserSet().add(beneficiary);
+        return userRepository.save(user);
+
     }
 
 

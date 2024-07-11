@@ -109,19 +109,20 @@ public String addbeneficiary(){
 
 @PutMapping("/addbeneficiary")
     public String addbeneficiary(@RequestParam("email") String email){
-        User beneficiary = userRepository.findByEmail(email)
-                .orElseThrow(()->new UsernameNotFoundException("this email dose not exist"));
-    System.out.println("beneficiary email is"+beneficiary.getEmail());
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principle = authentication.getPrincipal();
-        UserDetails userDetails = (UserDetails) principle;
-       User user = userRepository.findByEmail(userDetails.getUsername())
-               .orElseThrow(()->new UsernameNotFoundException("user did not find"));
-    System.out.println("user email is "+user.getEmail());
-       user.getUserSet().add(beneficiary);
-    System.out.println(user.getUserSet());
-       userRepository.save(user);
+//        User beneficiary = userRepository.findByEmail(email)
+//                .orElseThrow(()->new UsernameNotFoundException("this email dose not exist"));
+//    System.out.println("beneficiary email is"+beneficiary.getEmail());
+//
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        Object principle = authentication.getPrincipal();
+//        UserDetails userDetails = (UserDetails) principle;
+//       User user = userRepository.findByEmail(userDetails.getUsername())
+//               .orElseThrow(()->new UsernameNotFoundException("user did not find"));
+//    System.out.println("user email is "+user.getEmail());
+//       user.getUserSet().add(beneficiary);
+//    System.out.println(user.getUserSet());
+//       userRepository.save(user);
+    userService.addBeneficiary(email);
       return "save";
 
 

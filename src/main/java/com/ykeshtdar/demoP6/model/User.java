@@ -26,17 +26,21 @@ public class User {
     String password;
     @Column(name = "role" )
     String role ;
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "friend",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
     Set<User>userSet = new HashSet<>();
+//    @OneToMany(mappedBy = "sender")
+//    List<Transaction> transactionList;
     @OneToMany(mappedBy = "sender")
-    List<Transaction> transactionList;
+    Set<Transaction>sendertransactionSet = new HashSet<>();
     @OneToMany(mappedBy = "receiver")
-    List<Beneficiary> beneficiaryList;
+    Set<Transaction> recievertransactionSet = new HashSet<>();
+//    @OneToMany(mappedBy = "receiver")
+//    List<Beneficiary> beneficiaryList;
     @Column(name = "balance")
     float balance;
 
