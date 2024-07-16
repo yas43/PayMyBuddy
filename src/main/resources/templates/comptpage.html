@@ -73,6 +73,23 @@ th{
 </style>
 <body>
 
+<form th:action="@{/transfer/pay}"  th:method="post" class="inscription">
+    <label for="email">enter email</label>
+    <input type="text" id="email" name="email"><br><br>
+    <label for="amount">enter amount:</label>
+    <input type="number" id="amount" name="amount"><br><br>
+    <label for="description">enter description:</label>
+    <input type="text" id="description" name="description"><br><br>
+    <div class="btn">
+        <input type="submit" value="Submit" >
+    </div>
+</form>
+
+
+
+
+
+
 <form th:action="@{/user/alltransaction}"  th:method="post" class="inscription">
     <label for="sender">enter senderId:</label>
     <input type="text" id="sender" name="senderId"><br><br>

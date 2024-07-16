@@ -30,15 +30,19 @@ public class UserRegistryRestController {
     }
     @PutMapping("/{userId}/friend/{friendId}")
     public User addFriend(@PathVariable int userId,@PathVariable int friendId){
-        User user = userRepository.findById(userId);
-        User friend = userRepository.findById(friendId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(()->new RuntimeException("no user with this id"));
+        User friend = userRepository.findById(friendId)
+                        .orElseThrow(()->new RuntimeException("no user whit this id"));
         user.getUserSet().add(friend);
         return userRepository.save(user);
     }
     @PutMapping("{senderId}/receiver/{receiverId}")
     public Transaction addTransaction(@PathVariable int senderId,@PathVariable int receiverId){
-        User senderUser = userRepository.findById(senderId);
-        User receiverUser = userRepository.findById(receiverId);
+        User senderUser = userRepository.findById(senderId)
+                .orElseThrow(()->new RuntimeException("no user with this id"));
+        User receiverUser = userRepository.findById(receiverId)
+                .orElseThrow(()->new RuntimeException("no user with this id"));
 //        System.out.println("sender name = "+senderUser.getUsername());
 //        System.out.println("receiver name = "+receiverUser.getUsername());
         Transaction transaction = new Transaction();

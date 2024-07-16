@@ -4,9 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.*;
+import java.util.*;
 
 @Entity
 @Table(name = "transaction")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Transaction {
@@ -27,6 +30,6 @@ public class Transaction {
     @Column(name = "fee")
     float fee;
     @Column(name = "date")
-    LocalDateTime date;
+    Date date;
 
 }

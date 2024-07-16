@@ -72,17 +72,33 @@ public class UserService {
 //        return user;
 //    }
 
+//    public User updateUser(){
+//        User curentUser = getconnectedUser();
+//        curentUser.setBalance(curentUser.getBalance());
+//        curentUser.setUserSet(curentUser.getUserSet());
+//        curentUser.setPassword(curentUser.getPassword());
+//        curentUser.setEmail(curentUser.getEmail());
+//
+//    }
+
+
+
     public User updateuser(User user){
 
-        User user1 = userRepository.findByUsername(user.getUsername())
-                .orElseThrow(()->new UsernameNotFoundException("there is no this user"));
+        User currentUser = getconnectedUser();
+        int id = currentUser.getId();
 
-        int id = user1.getId();
+
+
+//        User user1 = userRepository.findByUsername(user.getUsername())
+//                .orElseThrow(()->new UsernameNotFoundException("there is no this user"));
+//
+//        int id = user1.getId();
 
 //        int id =userRepository.findByUsername(user.getUsername()).getId();
 
 //      User actueluser = userRepository.findById(id);
-        Optional<User> optional = Optional.ofNullable(userRepository.findById(id));
+        Optional<User> optional = userRepository.findById(id);
         User actualuser = null;
 //        User actualuser = new User();
         if (optional.isPresent()){
@@ -202,6 +218,8 @@ public class UserService {
         return user;
 
     }
+
+
 
 
 
