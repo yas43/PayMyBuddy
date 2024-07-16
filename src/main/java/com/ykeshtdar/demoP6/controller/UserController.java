@@ -53,7 +53,10 @@ public class UserController {
     }
 
     @GetMapping("/welcome")
-    public  String welcome(){
+    public  String welcome(Model model){
+        model.addAttribute("username",new User());
+        User currentUser = userService.getconnectedUser();
+        model.addAttribute("username",currentUser.getUsername());
         return "welcome";
     }
 

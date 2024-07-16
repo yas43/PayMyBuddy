@@ -174,19 +174,32 @@ public class UserService {
     }
 
     private boolean isValidEmail(String email){
-        Pattern pattern = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$");
-        Matcher match = pattern.matcher(email);
-        return match.hasMatch();
+//        Pattern pattern = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$");
+//        Matcher match = pattern.matcher(email);
+//        return match.hasMatch();
+        return true;
 
     }
     private boolean isExistAlready(String email){
-        Optional<User>optional = userRepository.findByEmail(email);
-        if (optional.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+//        Optional<User>optional = userRepository.findByEmail(email);
+//        if (optional.isPresent()){
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
+        return false;
+
+    }
+
+    public User getconnectedUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principle = authentication.getPrincipal();
+        UserDetails userDetails = (UserDetails) principle;
+        User user = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(()->new UsernameNotFoundException("user did not find"));
+        System.out.println("hello this is current user username "+user.getUsername());
+        return user;
 
     }
 

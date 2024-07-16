@@ -17,7 +17,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
             setDefaultTargetUrl("/user/welcome");
         }
         else {
-            setDefaultTargetUrl("/user/welcome");
+            setDefaultTargetUrl("/user/login");
         }
         super.onAuthenticationSuccess(request, response, authentication);
     }
