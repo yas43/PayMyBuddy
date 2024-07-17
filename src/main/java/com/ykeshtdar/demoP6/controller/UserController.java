@@ -35,9 +35,15 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public String connectUser(@ModelAttribute("User") User user){
-        userService.saveUserInfo(user);
-        return"save";
+    public String registerUser(@ModelAttribute("User") User user){
+        try {
+            userService.createUser(user);
+            return "redirect:/user/logIn";
+        }catch (Exception e){
+            return "signUp";
+        }
+//        userService.createUser(user);
+//        return"save";
     }
 
     @GetMapping("/login")
@@ -45,12 +51,12 @@ public class UserController {
 //        model.addAttribute("User",new User());
         return "logIn";
     }
-    @PostMapping("/login")
-    public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
-//        userService.logIn(email);
-        customUserDetailService.loadUserByUsername(email);
-        return"save";
-    }
+//    @PostMapping("/login")
+//    public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
+////        userService.logIn(email);
+//        customUserDetailService.loadUserByUsername(email);
+//        return"save";
+//    }
 
     @GetMapping("/welcome")
     public  String welcome(Model model){
@@ -83,7 +89,7 @@ var user = userRepository.findByEmail(userDetails.getUsername())
     @PutMapping("/modify")
     public String update(@ModelAttribute ("User") User user){
             userService.updateuser(user);
-            return "save";
+            return "redirect:/user/modify";
     }
 
 
@@ -94,10 +100,10 @@ var user = userRepository.findByEmail(userDetails.getUsername())
 }
 
 @PostMapping("/alltransaction")
-    public String displayalltransaction(Model model,@RequestParam("senderId") int senderId,@RequestParam("receiverId") int reciverId){
-    System.out.println("senderId is :"+senderId);
-    System.out.println("receiverId is "+reciverId);
-        model.addAttribute("transaction",userService.findalltransaction(senderId,reciverId));
+    public String displayalltransaction(Model model,@RequestParam("email") String email){
+//    System.out.println("senderId is :"+senderId);
+    System.out.println("receiverId is "+email);
+        model.addAttribute("transaction",userService.findallTransaction(email));
         return "comptpage";
 }
 
@@ -126,7 +132,7 @@ public String addbeneficiary(){
 //    System.out.println(user.getUserSet());
 //       userRepository.save(user);
     userService.addBeneficiary(email);
-      return "save";
+      return "redirect:/user/addbeneficiary";
 
 
 }

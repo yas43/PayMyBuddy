@@ -24,7 +24,7 @@ public class TransactionController {
     public String pay( @RequestParam("email")String receiverEmail,
                            @RequestParam("amount")float amount, @RequestParam("description")String description){
       transactionService.createTransaction(receiverEmail,amount,description);
-      return "save";
+      return "redirect:/transfer";
 
     }
 }

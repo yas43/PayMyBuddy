@@ -55,5 +55,14 @@ public class UserRegistryRestController {
     public List<TransactionHistory> showAllTransaction(@PathVariable int senderId, @PathVariable int receiverId){
         return  transactionRepository.findTransaction(senderId,receiverId);
     }
+    @DeleteMapping("user")
+    public void deleteUser(@RequestParam String email,@RequestParam String password){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()->new RuntimeException("email is not correct"));
+//        if (passwordEncoder.encode(user.getPassword()).equals(password)){
+            userRepository.delete(user);
+//        }
+//        else throw new RuntimeException("password is not correct");
+    }
 }
 

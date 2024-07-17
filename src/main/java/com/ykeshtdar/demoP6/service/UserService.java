@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.core.*;
 import org.springframework.security.core.context.*;
 import org.springframework.security.core.userdetails.*;
+import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final TransactionRepository transactionRepository;
 
-
-
+@Autowired
+private PasswordEncoder passwordEncoder;
 
 
 
@@ -34,8 +35,11 @@ public class UserService {
     }
 
 
-    public User saveUserInfo(User user){
+    public User createUser(User user){
         if (isValidEmail( user.getEmail()) && !isExistAlready(user.getEmail())) {
+            user.setBalance(0);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRole("USER");
             return userRepository.save(user);
         }
         else {
@@ -88,32 +92,33 @@ public class UserService {
         User currentUser = getconnectedUser();
         int id = currentUser.getId();
 
-
-
-//        User user1 = userRepository.findByUsername(user.getUsername())
-//                .orElseThrow(()->new UsernameNotFoundException("there is no this user"));
-//
-//        int id = user1.getId();
-
-//        int id =userRepository.findByUsername(user.getUsername()).getId();
-
-//      User actueluser = userRepository.findById(id);
-        Optional<User> optional = userRepository.findById(id);
-        User actualuser = null;
-//        User actualuser = new User();
-        if (optional.isPresent()){
-
-            actualuser = optional.get();
-
-            actualuser.setUsername(user.getUsername());
-            actualuser.setPassword(user.getPassword());
-            actualuser.setEmail(user.getEmail());
-            userRepository.save(actualuser);
+        currentUser.setUsername(user.getUsername());
+        currentUser.setEmail(user.getEmail());
+        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (isValidEmail(user.getEmail())){
+          return  userRepository.save(currentUser);
         }
         else {
-            throw new RuntimeException("user do not exist");
+            throw new RuntimeException("email is not valid");
         }
-        return user;
+
+
+
+//        Optional<User> optional = userRepository.findById(id);
+//        User actualuser = null;
+//        if (optional.isPresent()){
+//
+//            actualuser = optional.get();
+//
+//            actualuser.setUsername(user.getUsername());
+//            actualuser.setPassword(user.getPassword());
+//            actualuser.setEmail(user.getEmail());
+//            userRepository.save(actualuser);
+//        }
+//        else {
+//            throw new RuntimeException("user do not exist");
+//        }
+//        return user;
 
     }
 
@@ -132,20 +137,20 @@ public class UserService {
 //       return userRepository.findByUsername(username);
 //    }
 
-    public User logIn(String email){
-        Optional<User>optional = userRepository.findByEmail(email);
-         User user = null;
-
-
-        if (optional.isPresent() ){
-            user = optional.get();
-        }
-        else {
-            throw new RuntimeException("user dose not exist");
-        }
-        return user;
-
-    }
+//    public User logIn(String email){
+//        Optional<User>optional = userRepository.findByEmail(email);
+//         User user = null;
+//
+//
+//        if (optional.isPresent() ){
+//            user = optional.get();
+//        }
+//        else {
+//            throw new RuntimeException("user dose not exist");
+//        }
+//        return user;
+//
+//    }
 
 //    public List<User> showalluserusingquery(){
 //        return userRepository.findalluser();
@@ -165,7 +170,11 @@ public class UserService {
 //}
 
 
-    public List<TransactionHistory> findalltransaction(int senderId,int receiverId){
+    public List<TransactionHistory> findallTransaction(String email){
+        int senderId = getconnectedUser().getId();
+        User receiver = userRepository.findByEmail(email)
+                .orElseThrow(()->new RuntimeException("this email is not valid"));
+        int receiverId = receiver.getId();
         return transactionRepository.findTransaction(senderId,receiverId);
     }
     public User addBeneficiary(String email){
@@ -189,26 +198,27 @@ public class UserService {
 
     }
 
-    private boolean isValidEmail(String email){
-//        Pattern pattern = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$");
+// This regular expression is provided by the OWASP validation regex repository to check the email validation:
+//^[a-zA-Z0-9_+&*-] + (?:\\.[a-zA-Z0-9_+&*-] + )*@(?:[a-zA-Z0-9-]+\\.) + [a-zA-Z]{2, 7}
+//  https://www.baeldung.com/
+    public static boolean isValidEmail(String email){
+//        Pattern pattern = Pattern.compile("^[a-zA-Z0-9_+&*-] + (?:\\.[a-zA-Z0-9_+&*-] + )*@( ?:[a-zA-Z0-9-]+\\.) + [a-zA-Z]{2,7}");
 //        Matcher match = pattern.matcher(email);
 //        return match.hasMatch();
-        return true;
+return true;
 
     }
     private boolean isExistAlready(String email){
-//        Optional<User>optional = userRepository.findByEmail(email);
-//        if (optional.isPresent()){
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
-        return false;
-
+        Optional<User>optional = userRepository.findByEmail(email);
+        if (optional.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public User getconnectedUser(){
+    public    User getconnectedUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principle = authentication.getPrincipal();
         UserDetails userDetails = (UserDetails) principle;

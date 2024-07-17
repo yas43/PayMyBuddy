@@ -15,13 +15,13 @@
 
 
     <label for="name">user name:</label>
-    <input type="text" id="name"  name="username" th:placeholder="${user.username}" /><br><br>
+    <input type="text" id="name"  name="username" th:value="${user.username}" /><br><br>
 <!--    <input type="text" id="name" name="username" th:field="*{username}"><br><br>-->
     <label for="mail">mail:</label>
-    <input type="text" id="mail"  name="email" th:placeholder="${user.email}" /><br><br>
+    <input type="text" id="mail"  name="email" th:value="${user.email}" /><br><br>
 <!--    <input type="text" id="mail" name="email" th:field="*{email}"><br><br>-->
     <label for="pass">password:</label>
-    <input type="text" id="pass"  name="password" th:placeholder="${user.password}" /><br><br>
+    <input type="text" id="pass"  name="password" th:value="${user.password}" /><br><br>
 <!--    <input type="text" id="pass" name="password" th:field="*{password}"><br><br>-->
     <input type="submit" value="Submit">
 </form>
@@ -49,5 +49,9 @@
 <!--    </tr>-->
 <!--    </tbody>-->
 <!--</table>-->
+
+<a th:href="@{/user/welcome}" >home</a>
+<a th:href="@{/user/alltransaction}" >profile</a>
+<a th:href="@{/user/addbeneficiary}" >addfriends</a>
 </body>
 </html>

@@ -91,10 +91,10 @@ th{
 
 
 <form th:action="@{/user/alltransaction}"  th:method="post" class="inscription">
-    <label for="sender">enter senderId:</label>
-    <input type="text" id="sender" name="senderId"><br><br>
+    <!--<label for="sender">enter senderId:</label>
+    <input type="text" id="sender" name="senderId"><br><br>-->
     <label for="receive">enter receiverId:</label>
-    <input type="text" id="receive" name="receiverId"><br><br>
+    <input type="text" id="receive" name="email"><br><br>
     <div class="btn">
         <input type="submit" value="Submit" >
     </div>
@@ -214,7 +214,9 @@ th{
     </div>
 
 
-
+<a th:href="@{/user/modify}" >modify</a>
+<a th:href="@{/user/welcome}" >home</a>
+<a th:href="@{/user/addbeneficiary}" >addfriends</a>
     
    
 </div>

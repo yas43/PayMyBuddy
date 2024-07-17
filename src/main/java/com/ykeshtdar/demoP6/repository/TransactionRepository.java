@@ -63,7 +63,7 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
             "            FROM Transaction t  " +
             "            WHERE (t.sender.id= :sender_id " +
             "            AND t.receiver.id= :receiver_id )")
-    List<TransactionHistory> findTransaction(@Param("sender_id")int sender_id,@Param("receiver_id")int receiver_id);
+    List<TransactionHistory> findTransaction(@Param("sender_id")int senderId,@Param("receiver_id")int receiverId);
 
 
 //@Query("select new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id,t.receiver,t.description,t.amount) FROM TransactionHistory t ")

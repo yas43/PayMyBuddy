@@ -18,10 +18,12 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
     @Autowired
-    public TransactionService(TransactionRepository transactionRepository, UserRepository userRepository) {
+    public TransactionService(TransactionRepository transactionRepository, UserRepository userRepository, UserService userService) {
         this.transactionRepository = transactionRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     public Transaction createTransaction( String email, float amount,String description) {
@@ -56,10 +58,23 @@ public class TransactionService {
     }
 
     private boolean hasValidReceiver(String email) {
+//        boolean beneficiaryHasValidEmail =  UserService.isValidEmail(email);
+//        User receiver = userRepository.findByEmail(email)
+//                .orElseThrow(()->new RuntimeException("receiverEmail is not exist in database"));
+//        boolean beneficiaryIsInFriendList = userService.getconnectedUser().getUserSet().contains(receiver);
+//
+//        if (beneficiaryHasValidEmail && beneficiaryIsInFriendList){
+//            return true;
+//        }
+//        else return false;
         return true;
     }
 
     private boolean hasVaidAmount(float amount) {
+//        if (userService.getconnectedUser().getBalance()>=(1+fee)*amount && amount>0){
+//            return true;
+//        }
+//        else return false;
         return true;
     }
 
@@ -96,5 +111,6 @@ public class TransactionService {
         user.setBalance( user.getBalance()+amount);
         return userRepository.save(user);
     }
+
 
 }
