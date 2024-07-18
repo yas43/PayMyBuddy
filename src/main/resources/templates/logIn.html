@@ -5,99 +5,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Title</title>
 </head>
 <style>
-    *{
-        padding: 0;
-        margin: 0;
+    body{
+        font-family: Arial, Helvetica, sans-serif;
     }
-
-    html{
-        font-size: 62.5%;
-    }
-
-    body {
-  font-family: "Rubik", sans-serif;
-  line-height: 1;
-  font-weight: 400;
-  color: #555;
-}
-    .container{
-        max-width: 120 rem;
-        padding: 0 3.2rem;
-        margin: 0 auto;
-       
-    }
-
-
-    .header{
-        background-color: rgb(246, 248, 212); 
-        display: flex;
-        justify-content: center;
-        height: 10rem; 
-        /* width: 50%; */
-        padding-top: 5rem;
-    
+    .login-form{
+        display:grid;
+        margin: 150px auto;
+        width: fit-content;
+        justify-items: center;
+        padding: 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: gray;
     }
     .title{
-        background-color: rgb(202, 202, 235);
-        padding-top: 5rem;
-        width: 50%;
-        display: flex;
-        justify-content: center;
+        margin: 30px 10px;
+        font-weight: bold;
+        background-color: #F69F1D;
+        width: 150px;
+        font-size: 14px;
+        text-align: center;
+        border-radius: 3px;
+        border-width: 0px;
+        padding: 12px 5px;
+        color: white;
+    }
+    .title h1{
+        margin: 0px;
+    }
+    .login{
+        margin: auto;
     }
 
-
-    .body{
-        display:flex;
-        justify-content: center;
-        background-color: rgb(213, 233, 213);
-        /* width: 50%; */
-       
+    .textfeild{
+        border: 1px solid #E0E0E0;
+        border-radius: 3px;
+        padding: 5px;
+        margin: 10px 30px;
+        background-color: #FFFFFF;
+    }
+    .textfeild:focus{
+        outline: none;
+    }
+    .textfeild::-webkit-input-placeholder {
+        font-weight: bold;
+    }
+    .btn{
+        background-color: #207FEE;
+        color: #FFFFFF;
+        border-radius: 3px;
+        border-width: 0px;
+        padding: 5px;
+        margin: 30px 30px;
+        aspect-ratio: 18/4;
+        width: 140px;
+        font-weight: bold;
 
     }
-
-    .bodycontainer{
-        background-color: rgb(191, 155, 224);
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-        display: flex;
-        justify-content: center;
-        width: 50%;
-    }
-   
-    .inscription{
-        display:flex;
-        gap: 2.4 rem;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-   
-
 </style>
 <body>
-    
-    <div class="container">
-        <div class="header">
-           <div class="title">
-                <p>pay my buddy</p>
-            </div>
+<section id="login">
+    <form th:action="@{/user/logIn}" method="post" class="login-form">
+        <div class="title">
+            <h1>pay my buddy</h1>
         </div>
-        
-        <div class="body">
-            <div class="bodycontainer">
-                <form th:action="@{/user/logIn}"  method="post" class="inscription">
-                    <label for="mail">E mail:</label>
-                    <input type="email" id="mail" name="email" ><br><br>
-                    <label for="pass">password:</label>
-                    <input type="password" id="pass" name="password" ><br><br>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-        </div>
-        
-    </div>
+        <input class="textfeild" type="email" placeholder="Mail" id="email" name="email">
+        <input class="textfeild" type="password" placeholder="password" id="password" name="password">
+        <input type="submit" value="login" class="btn">
+    </form>
+</section>
 </body>
 </html>
