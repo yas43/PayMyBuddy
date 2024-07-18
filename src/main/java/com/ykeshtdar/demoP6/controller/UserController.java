@@ -38,7 +38,7 @@ public class UserController {
     public String registerUser(@ModelAttribute("User") User user){
         try {
             userService.createUser(user);
-            return "redirect:/user/logIn";
+            return "redirect:/user/login";
         }catch (Exception e){
             return "signUp";
         }
