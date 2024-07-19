@@ -47,16 +47,16 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(){
-//        model.addAttribute("User",new User());
+    public String login(Model model){
+        model.addAttribute("User",new User());
         return "logIn";
     }
-//    @PostMapping("/login")
-//    public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
-////        userService.logIn(email);
-//        customUserDetailService.loadUserByUsername(email);
-//        return"save";
-//    }
+    @PostMapping("/login")
+    public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
+//        userService.logIn(email);
+        customUserDetailService.loadUserByUsername(email);
+        return"redirect:/user/logIn";
+    }
 
     @GetMapping("/welcome")
     public  String welcome(Model model){
