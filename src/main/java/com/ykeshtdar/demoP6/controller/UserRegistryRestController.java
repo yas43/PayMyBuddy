@@ -56,7 +56,7 @@ public class UserRegistryRestController {
         return  transactionRepository.findTransaction(senderId,receiverId);
     }
     @DeleteMapping("user")
-    public void deleteUser(@RequestParam String email,@RequestParam String password){
+    public void deleteUser(@RequestParam String email){
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()->new RuntimeException("email is not correct"));
 //        if (passwordEncoder.encode(user.getPassword()).equals(password)){

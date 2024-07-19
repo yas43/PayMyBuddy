@@ -14,7 +14,7 @@ import java.util.*;
 
 @Service
 public class TransactionService {
-    private final static double fee = 0.005;
+    private final static double fee = 0.005;  //capital letters
 
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;

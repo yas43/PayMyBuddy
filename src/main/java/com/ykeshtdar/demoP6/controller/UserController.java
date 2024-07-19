@@ -72,8 +72,7 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             Object principal = authentication.getPrincipal();
             UserDetails userDetails = (UserDetails) principal;
-            System.out.println(userDetails.getUsername());
-
+//            System.out.println(userDetails.getUsername());
 //        System.out.println(userRepository.findByEmail(userDetails.getUsername()));
 var user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(()->new UsernameNotFoundException("user did not found"));

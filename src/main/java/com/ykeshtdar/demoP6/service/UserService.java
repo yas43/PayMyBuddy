@@ -90,12 +90,27 @@ private PasswordEncoder passwordEncoder;
     public User updateuser(User user){
 
         User currentUser = getconnectedUser();
-        int id = currentUser.getId();
 
-        currentUser.setUsername(user.getUsername());
-        currentUser.setEmail(user.getEmail());
-        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+if (user.getPassword().equals(currentUser.getPassword())) {
+    currentUser.setUsername(user.getUsername());
+    currentUser.setEmail(user.getEmail());
+    currentUser.setPassword(user.getPassword());
+}
+else {
+    currentUser.setUsername(user.getUsername());
+    currentUser.setEmail(user.getEmail());
+    currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+}
+//        if (user.getPassword().isEmpty()){
+//            currentUser.setPassword(currentUser.getPassword());
+//        }
+//        if (isValidPassword(user.getPassword()) && !user.getPassword().isEmpty()){
+//            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+//        }
+//        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+
         if (isValidEmail(user.getEmail())){
+            System.out.println("befor save in DB");
           return  userRepository.save(currentUser);
         }
         else {
@@ -120,6 +135,10 @@ private PasswordEncoder passwordEncoder;
 //        }
 //        return user;
 
+    }
+
+    private boolean isValidPassword(String password) {
+        return true;
     }
 
 //    public User callUserById(int id){
