@@ -44,6 +44,11 @@ public class SecurityConfiguration {
                                     .successHandler(new AuthenticationSuccessHandler())
                                     .permitAll();
                 })
+              .logout(httpSecurityLogoutConfigurer -> {
+                  httpSecurityLogoutConfigurer
+                          .logoutSuccessUrl("/user/login")
+                          .permitAll();
+              })
               .build();
 
     }
