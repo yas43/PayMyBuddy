@@ -80,4 +80,15 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
 //    List<TransactionHistory> findTransactionsByUsername(@Param("username") String username);
 
 
+//    @Query(value = "select t.id,t.date,t.fee,t.receiver_id,t.sender_id, t.description, t.amount" +
+//            "            FROM transaction t  " +
+//            "            WHERE t.sender_id= :sender_id ",nativeQuery = true)
+
+
+    @Query("SELECT new com.ykeshtdar.demoP6.model.dto.TransactionHistory(t.id ,r.username, t.description, t.amount)" +
+            "            FROM Transaction t  " +
+            "            JOIN t.receiver r   " +
+            "            WHERE t.sender.id= :senderId ")
+    List<TransactionHistory> findAllTransaction(@Param("senderId")int senderId);
+
 }

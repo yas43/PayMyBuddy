@@ -6,16 +6,11 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class TransactionHistory {
 
     int id;
-
-
     String receiver;
-
     String description;
-
     float amount;
 
 

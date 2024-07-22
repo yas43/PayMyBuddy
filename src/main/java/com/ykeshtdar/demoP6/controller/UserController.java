@@ -94,17 +94,19 @@ var user = userRepository.findByEmail(userDetails.getUsername())
 
 
 @GetMapping("/alltransaction")
-    public String showalltarnsaction(){
-    return "comptpage";
-}
-
-@PostMapping("/alltransaction")
-    public String displayalltransaction(Model model,@RequestParam("email") String email){
-//    System.out.println("senderId is :"+senderId);
-    System.out.println("receiverId is "+email);
-        model.addAttribute("transaction",userService.findallTransaction(email));
+    public String showalltarnsaction(Model model){
+//    model.addAttribute("transaction", new Transaction());
+    model.addAttribute("transaction",userService.findallTransaction());
         return "comptpage";
 }
+
+//@PostMapping("/alltransaction")
+//    public String displayalltransaction(Model model,@RequestParam("email") String email){
+////    System.out.println("senderId is :"+senderId);
+//    System.out.println("receiverId is "+email);
+//        model.addAttribute("transaction",userService.findallTransaction());
+//        return "comptpage";
+//}
 
 @GetMapping("addbeneficiary")
 public String addbeneficiary(){

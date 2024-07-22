@@ -189,12 +189,13 @@ else {
 //}
 
 
-    public List<TransactionHistory> findallTransaction(String email){
+    public List<TransactionHistory> findallTransaction(){
         int senderId = getconnectedUser().getId();
-        User receiver = userRepository.findByEmail(email)
-                .orElseThrow(()->new RuntimeException("this email is not valid"));
-        int receiverId = receiver.getId();
-        return transactionRepository.findTransaction(senderId,receiverId);
+//        User receiver = userRepository.findByEmail(email)
+//                .orElseThrow(()->new RuntimeException("this email is not valid"));
+//        int receiverId = receiver.getId();
+        return transactionRepository.findAllTransaction(senderId);
+//        return transactionRepository.findTransaction(senderId,receiverId);
     }
     public User addBeneficiary(String email){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

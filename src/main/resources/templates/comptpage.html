@@ -73,7 +73,7 @@ th{
 </style>
 <body>
 
-<form th:action="@{/transfer/pay}"  th:method="post" class="inscription">
+<!--<form th:action="@{/transfer/pay}"  th:method="post" class="inscription">
     <label for="email">enter email</label>
     <input type="text" id="email" name="email"><br><br>
     <label for="amount">enter amount:</label>
@@ -83,22 +83,22 @@ th{
     <div class="btn">
         <input type="submit" value="Submit" >
     </div>
-</form>
+</form>-->
 
 
 
 
 
 
-<form th:action="@{/user/alltransaction}"  th:method="post" class="inscription">
-    <!--<label for="sender">enter senderId:</label>
-    <input type="text" id="sender" name="senderId"><br><br>-->
+<!--<form th:action="@{/user/alltransaction}"  th:method="post" class="inscription">
+    &lt;!&ndash;<label for="sender">enter senderId:</label>
+    <input type="text" id="sender" name="senderId"><br><br>&ndash;&gt;
     <label for="receive">enter receiverId:</label>
     <input type="text" id="receive" name="email"><br><br>
     <div class="btn">
         <input type="submit" value="Submit" >
     </div>
-</form>
+</form>-->
 
 <!--<form th:action="@{/user/display/user}"  th:method="post" class="inscription">
     <label for="sender">enter senderId:</label>
@@ -167,9 +167,9 @@ th{
         <table>
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
+                <th>Receiver</th>
+                <th>amount</th>
+                <th>description</th>
             </tr>
             </thead>
             <tbody>
@@ -182,35 +182,7 @@ th{
             </tbody>
         </table>
 
-<!--        <table>-->
-<!--            <thead>-->
-<!--    <tr>-->
-<!--        <th class="mestransaction">Mes Transactions</th>-->
-<!--    </tr>-->
-<!--    <tr class="tablerow">-->
-<!--        <th>Relations</th>-->
-<!--        <th>Description</th>-->
-<!--        <th>Relations</th>-->
-<!--    </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--    <tr>-->
-<!--        <th>Laure-Anne</th>-->
-<!--        <th>Restaurant</th>-->
-<!--        <th>10€</th>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--        <th>Clara</th>-->
-<!--        <th>Voyage</th>-->
-<!--        <th>25€</th>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--        <th>Luc</th>-->
-<!--        <th>Billets de cinéma</th>-->
-<!--        <th>8€</th>-->
-<!--    </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
+
     </div>
 
 

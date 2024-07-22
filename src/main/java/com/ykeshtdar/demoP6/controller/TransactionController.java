@@ -15,10 +15,10 @@ public class TransactionController {
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
-    @GetMapping
-    public String pay(){
-        return "comptpage";
-    }
+//    @GetMapping
+//    public String pay(){
+//        return "comptpage";
+//    }
 
     @PostMapping("/pay")
     public String pay( @RequestParam("email")String receiverEmail,
