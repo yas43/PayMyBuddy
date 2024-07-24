@@ -11,7 +11,9 @@ import org.springframework.security.core.context.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.*;
 
 @Controller
 @RequestMapping("/user")
@@ -95,7 +97,8 @@ var user = userRepository.findByEmail(userDetails.getUsername())
 
 @GetMapping("/alltransaction")
     public String showalltarnsaction(Model model){
-//    model.addAttribute("transaction", new Transaction());
+    model.addAttribute("transaction", new Transaction());
+    model.addAttribute("options",userService.findAllFriends());
     model.addAttribute("transaction",userService.findallTransaction());
         return "comptpage";
 }
@@ -109,7 +112,8 @@ var user = userRepository.findByEmail(userDetails.getUsername())
 //}
 
 @GetMapping("addbeneficiary")
-public String addbeneficiary(){
+public String addbeneficiary(Model model){
+        model.addAttribute("friends",userService.findAllFriends());
         return "addBeneficiary";
 }
 
@@ -118,7 +122,7 @@ public String addbeneficiary(){
 
 
 @PutMapping("/addbeneficiary")
-    public String addbeneficiary(@RequestParam("email") String email){
+    public String addbeneficiary(@RequestParam("email") String email, RedirectAttributes redirectAttributes){
 //        User beneficiary = userRepository.findByEmail(email)
 //                .orElseThrow(()->new UsernameNotFoundException("this email dose not exist"));
 //    System.out.println("beneficiary email is"+beneficiary.getEmail());
@@ -132,9 +136,14 @@ public String addbeneficiary(){
 //       user.getUserSet().add(beneficiary);
 //    System.out.println(user.getUserSet());
 //       userRepository.save(user);
-    userService.addBeneficiary(email);
-      return "redirect:/user/addbeneficiary";
-
+   try {
+       userService.addBeneficiary(email);
+       redirectAttributes.addFlashAttribute("success","friend added successfuly");
+       return "redirect:/user/addbeneficiary";
+   }catch (Exception e){
+       redirectAttributes.addFlashAttribute("error","friend didi not added ,try again");
+       return "redirect:/user/addbeneficiary";
+   }
 
 }
 

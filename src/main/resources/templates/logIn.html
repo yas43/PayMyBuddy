@@ -67,6 +67,9 @@
     }
 </style>
 <body>
+<div th:if="${param.error}">
+    <p style="color :red">login failed.please try again</p>
+</div>
 <section id="login">
     <form th:action="@{/user/logIn}" method="post" class="login-form">
         <div class="title">

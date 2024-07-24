@@ -38,6 +38,8 @@ public class SecurityConfiguration {
                 .formLogin(httpSecurityFormLoginConfigurer -> {
                             httpSecurityFormLoginConfigurer
                                     .loginPage("/user/login")
+                                    .failureUrl("/user/login?error=true")
+                                    .defaultSuccessUrl("/user/logIn",true)
                                     .loginProcessingUrl("/user/logIn")
                                     .usernameParameter("email")
                                     .passwordParameter("password")
@@ -46,7 +48,9 @@ public class SecurityConfiguration {
                 })
               .logout(httpSecurityLogoutConfigurer -> {
                   httpSecurityLogoutConfigurer
-                          .logoutSuccessUrl("/user/login")
+                          .logoutSuccessUrl("/user/login?logout=true")
+                          .deleteCookies("JSESSIONID")
+                          .invalidateHttpSession(true)
                           .permitAll();
               })
               .build();

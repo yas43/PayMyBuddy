@@ -6,6 +6,12 @@
     <title>Title</title>
 </head>
 <body>
+<div th:if="${success}" >
+    <span th:text="${success}"></span>
+</div>
+<div th:if="${error}"  >
+    <span th:text="${error}"></span>
+</div>
 <form th:action="@{/user/addbeneficiary}"  th:method="post" class="inscription">
 
 
@@ -24,8 +30,22 @@
     <!--<label for="pass">password:</label>
     <input type="text" id="pass"  name="password" th:placeholder="${user.password}" /><br><br>-->
     <!--    <input type="text" id="pass" name="password" th:field="*{password}"><br><br>-->
-    <input type="submit" value="Submit">
+    <input type="submit" value="addfriend">
 </form>
+
+<table>
+    <thead>
+    <tr>
+        <th>friends</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="friend:${friends}">
+        <td th:text="${friend.email}"></td>
+    </tr>
+    </tbody>
+</table>
 
 
 <a th:href="@{/user/modify}" >modify</a>

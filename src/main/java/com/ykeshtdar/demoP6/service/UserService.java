@@ -218,6 +218,27 @@ else {
 
     }
 
+    public List<User> findAllFriends(){
+//        List<String>list =  new LinkedList<>();
+//        list.add("yaser");
+//        list.add("yash");
+//        list.add("gigi");
+//        list.add("matin");
+//        return list;
+
+        User user = getconnectedUser();
+       int senderId = user.getId();
+     List<Beneficiary> beneficiaries =  userRepository.findAllFriendsByUserId(senderId);
+     List<User>userListOfFriendlist = new LinkedList<>();
+     for (Beneficiary beneficiary:beneficiaries){
+         User friend = userRepository.findById(beneficiary.getFriendId())
+                 .orElseThrow(()->new RuntimeException("beneficary id do not exist"));
+         userListOfFriendlist.add(friend);
+     }
+     return userListOfFriendlist;
+
+    }
+
 // This regular expression is provided by the OWASP validation regex repository to check the email validation:
 //^[a-zA-Z0-9_+&*-] + (?:\\.[a-zA-Z0-9_+&*-] + )*@(?:[a-zA-Z0-9-]+\\.) + [a-zA-Z]{2, 7}
 //  https://www.baeldung.com/
