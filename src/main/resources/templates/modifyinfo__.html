@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/user/modify}" th:object="${User}" th:method="post" class="inscription">
+
+    <input type="hidden" name="_method" value="put" />
+
+<!--    <input type="text" id="usernameId"  name="username" th:placeholder="#{user.placeholder}" />-->
+
+
+
+    <label for="name">user name:</label>
+    <input type="text" id="name"  name="username" th:value="${user.username}" /><br><br>
+<!--    <input type="text" id="name" name="username" th:field="*{username}"><br><br>-->
+    <label for="mail">mail:</label>
+    <input type="text" id="mail"  name="email" th:value="${user.email}" /><br><br>
+<!--    <input type="text" id="mail" name="email" th:field="*{email}"><br><br>-->
+    <label for="pass">password:</label>
+    <input type="text" id="pass"  name="password" th:value="${user.password}" /><br><br>
+<!--    <input type="text" id="pass" name="password" th:field="*{password}"><br><br>-->
+    <input type="submit" value="Submit">
+</form>
+
+
+
+<a th:href="@{/user/welcome}" >home</a>
+<a th:href="@{/user/alltransaction}" >profile</a>
+<a th:href="@{/user/addbeneficiary}" >addfriends</a>
+</body>
+</html>
