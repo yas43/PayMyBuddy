@@ -4,100 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Title</title>
 </head>
 <style>
-     *{
-        padding: 0;
-        margin: 0;
-    }
-
-    html{
-        font-size: 62.5%;
-    }
-
-    body {
-  font-family: "Rubik", sans-serif;
-  line-height: 1;
-  font-weight: 400;
-  color: rgb(77, 68, 68);
-  background-color: rgb(200, 245, 230);
-}
-.navcontainer{
-    display: block;
-    
-}
-.navbar{
-    padding-top: 2rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5rem;
-    justify-content:end  
-}
-
-.middelcontainer{
-    padding-top: 10rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15rem;
-    justify-content:center  
-}
-
-.footer{
-    padding-top: 10rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15rem;
-    justify-content:center  
-}
-tr{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20rem;
-    padding-bottom: 7rem;
-}
-th{
-    padding-bottom: 6rem;
+    article {
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
+    height: fit-content;
+    width: fit-content;
+    margin: 150px auto 0 auto;
 }
-
+#post-form {
+    display: grid;
+    margin: auto;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px;
+    grid-template-columns: fit-content fit-content 1fr 1fr;
+}
+#post-form input , #post-form select {
+    margin: 10px;
+    border-radius: 5px;
+    border-width: 0px;
+    height: 35px;
+    font-size: 16px;
+    padding-left: 10px;
+}
+#post-form input:focus-visible, #post-form select:focus-visible {
+    outline: none;
+}
+#post-form #pay {
+    grid-column: 4/5;
+    background-color: #207FEE;
+    color: white;
+    width: 100px;
+}
+#relationship , #description, #amount {
+    box-shadow: 0px 0px 1px 1px #d7d7d7;
+}
+#post-form select, #post-form #description {
+    width: 250px;
+}
+#section-table {
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 1px #d7d7d7;
+    padding: 10px;
+}
+#section-table table {
+    width: 100%;
+    text-align: left;
+}
+#section-table table td{
+    padding: 10px 0;
+    border-top: 1px solid #d7d7d7;
+}
 </style>
 <body>
-<div th:if="${success}" >
-    <span th:text="${success}"></span>
-</div>
-<div th:if="${error}"  >
-    <span th:text="${error}"></span>
-</div>
-<form th:action="@{/transfer/pay}"  th:method="post"   class="inscription">
-    <select class="form-control" id="dropDownList" name="email">
-        <option value="0">select a friend</option>
-        <option th:each="option : ${options}" th:value="${option.email}" th:text="${option.email}  "></option>
-    </select>
-    <label for="amount">enter amount:</label>
-    <input type="number" id="amount" name="amount" ><br><br>
-    <label for="description">enter description:</label>
-    <input type="text" id="description" name="description" ><br><br>
-    <div class="btn">
-    <input type="submit" value="pay" >
-    </div>
-</form>
+<!--<div th:replace="~{fragments/header :: header}"></div>-->
+<article id="article-form">
+    <section id="section-form">
+        <form id="post-form" th:action="@{/transfer/pay}" th:method="post">
+            <select name="email" id="relationship" required>
+                <option value="0" >select a friend</option>
+                <option th:each="option :${options}" th:text="${option.email}" th:value="${option.email}" ></option>
+            </select>
+            <input type="text" name="description" placeholder="Description" id="description">
+            <input type="number" name="amount" placeholder="Montant" id="amount" required>
+            <input type="submit" value="Payer" name="pay" id="pay">
+        </form>
+    </section>
+    <section id="section-table">
+        <h1>Mes transactions</h1>
 
         <table>
             <thead>
             <tr>
                 <th>Receiver</th>
+                <th>Description</th>
                 <th>amount</th>
-                <th>description</th>
             </tr>
             </thead>
             <tbody>
@@ -105,20 +92,14 @@ th{
                 <td th:text="${transaction.receiver}"></td>
                 <td th:text="${transaction.amount}"></td>
                 <td th:text="${transaction.description}"></td>
-
             </tr>
-            </tbody>
+
         </table>
 
-
-    </div>
-
-
+    </section>
+</article>
 <a th:href="@{/user/modify}" >modify</a>
 <a th:href="@{/user/welcome}" >home</a>
 <a th:href="@{/user/addbeneficiary}" >addfriends</a>
-    
-   
-</div>
 </body>
 </html>
