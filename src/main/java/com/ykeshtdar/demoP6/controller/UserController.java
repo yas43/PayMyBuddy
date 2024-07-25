@@ -88,9 +88,16 @@ var user = userRepository.findByEmail(userDetails.getUsername())
     }
 
     @PutMapping("/modify")
-    public String update(@ModelAttribute ("User") User user){
+    public String update(@ModelAttribute ("User") User user,RedirectAttributes redirectAttributes){
+        try {
             userService.updateuser(user);
+            redirectAttributes.addFlashAttribute("success","information modify successfully");
             return "redirect:/user/modify";
+        }catch (Exception e){
+            redirectAttributes.addFlashAttribute("error","try again ,some things go wrong ");
+            return "redirect:/user/modify";
+        }
+
     }
 
 

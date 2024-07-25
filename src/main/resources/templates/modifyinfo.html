@@ -3,31 +3,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
 </head>
+<style>
+    #put-form {
+    font-family: Arial, Helvetica, sans-serif;
+    display:grid;
+    margin: 150px auto;
+    height: fit-content;
+    width: fit-content;
+    justify-items: center;
+    padding: 10px;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    align-items: center;
+}
+#put-form p {
+    text-align: center;
+}
+#username-label {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+#email-label {
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+#password-label {
+    grid-column: 1/2;
+    grid-row: 4/5;
+}
+#username, #usernametf {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    width: 100px;
+}
+input{
+    border-width: 0;
+}
+input:disabled{
+    background-color: white;
+}
+input:focus-visible{
+    outline: 0;
+}
+#email ,#emailtf {
+    grid-column: 2/3;
+    grid-row: 3/4;
+    width: 100px;
+}
+#password, #passwordtf {
+    grid-column: 2/3;
+    grid-row: 4/5;
+    width: 100px;
+
+}
+#submit {
+    grid-column: 3/4;
+    grid-row: 3/4;
+    background-color: #F69F1D;
+    color: white;
+    border-radius: 3px;
+    height: 30px;
+    width: 100px;
+}
+#cancel {
+    grid-column: 3/4;
+    grid-row: 4/5;
+    background-color: #207FEE;
+    color: white;
+    border-radius: 3px;
+    height: 30px;
+    width: 100px;
+    border-width: 0;
+}
+#cancel:focus-visible{
+    outline: 0;
+}
+.formeElement {
+    margin: 5px;
+}
+</style>
 <body>
-<form th:action="@{/user/modify}" th:object="${User}" th:method="post" class="inscription">
+<!--<div th:replace="~{/fragments/header :: header}"></div>-->
+<section id="edit-section">
+    <div th:if="${success}" >
+        <span th:text="${success}"></span>
+    </div>
+    <div th:if="${error}"  >
+        <span th:text="${error}"></span>
+    </div>
+    <form id="put-form" th:action="@{/user/modify}" th:method="post" th:object="${User}">
 
-    <input type="hidden" name="_method" value="put" />
+        <input type="hidden" name="_method" value="put" />
 
-<!--    <input type="text" id="usernameId"  name="username" th:placeholder="#{user.placeholder}" />-->
+        <label id="username-label" for="username" class="formeElement">Username</label>
+        <input type="text" id="username" name="username" th:value="${user.username}" class="formeElement" required>
 
+        <label id="email-label" for="email" class="formeElement">Email</label>
+        <input type="email" id="email" name="email" th:value="${user.email}" class="formeElement" required>
 
+        <label id="password-label" for="password" class="formeElement">Password</label>
+        <input type="password" id="password" th:value="${user.password}" placeholder="Mot de passe" name="password" class="formeElement" required>
 
-    <label for="name">user name:</label>
-    <input type="text" id="name"  name="username" th:value="${user.username}" /><br><br>
-<!--    <input type="text" id="name" name="username" th:field="*{username}"><br><br>-->
-    <label for="mail">mail:</label>
-    <input type="text" id="mail"  name="email" th:value="${user.email}" /><br><br>
-<!--    <input type="text" id="mail" name="email" th:field="*{email}"><br><br>-->
-    <label for="pass">password:</label>
-    <input type="text" id="pass"  name="password" th:value="${user.password}" /><br><br>
-<!--    <input type="text" id="pass" name="password" th:field="*{password}"><br><br>-->
-    <input type="submit" value="Submit">
-</form>
-
-
-
+        <input type="submit" value="Modifier" class="formeElement" id="submit">
+        <button type="button" value="Cancel" class="formeElement" id="cancel" style="display: none;">Cancel</button>
+    </form>
+</section>
 <a th:href="@{/user/welcome}" >home</a>
 <a th:href="@{/user/alltransaction}" >profile</a>
 <a th:href="@{/user/addbeneficiary}" >addfriends</a>
