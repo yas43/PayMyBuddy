@@ -64,15 +64,21 @@
 </style>
 <body>
 <!--<div th:replace="~{fragments/header :: header}"></div>-->
+<div th:if="${success}" >
+    <span th:text="${success}"></span>
+</div>
+<div th:if="${error}"  >
+    <span th:text="${error}"></span>
+</div>
 <article id="article-form">
     <section id="section-form">
         <form id="post-form" th:action="@{/transfer/pay}" th:method="post">
-            <select name="email" id="relationship" required>
+            <select name="email" id="relationship" >
                 <option value="0" >select a friend</option>
                 <option th:each="option :${options}" th:text="${option.email}" th:value="${option.email}" ></option>
             </select>
             <input type="text" name="description" placeholder="Description" id="description">
-            <input type="number" name="amount" placeholder="Montant" id="amount" required>
+            <input type="number" name="amount" placeholder="Montant" id="amount" >
             <input type="submit" value="Payer" name="pay" id="pay">
         </form>
     </section>

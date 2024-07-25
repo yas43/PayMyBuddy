@@ -5,6 +5,66 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    #post-form{
+     display: grid;
+     margin: 150px auto;
+     height: fit-content;
+     width: fit-content;
+     padding: 10px;
+     grid-template-columns: 3fr 1fr;
+     grid-template-rows: 1fr 2fr;
+     align-items: center;
+     font-family: Arial, Helvetica, sans-serif;
+ }
+ #post-form label{
+     grid-column: 1/4;
+     grid-row: 1/2;
+     margin-left: 10px;
+ }
+ #post-form #email:focus-visible{
+     outline: none;
+ }
+ #post-form #submit{
+     grid-column: 4/5;
+     grid-row: 2/4;
+     margin: 10px;
+     border-radius: 5px;
+     border-width: 0px;
+     background-color: #F69F1D;
+     width: 200px;
+     height: 35px;
+     color:white;
+     font-size: 16px;
+ }
+ #post-form #email{
+     grid-column: 1/4;
+     grid-row: 2/4;
+     margin: 10px;
+     border-radius: 5px;
+     padding: 5px;
+     border-width: 0px;
+     box-shadow: 0px 0px 2px 1px #dedede;
+     width: 400px;
+     height: 35px;
+     font-size: 18px;
+ }
+    #section-table {
+    width: 20%;
+    margin: 100px auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 1px #d7d7d7;
+    padding: 10px;
+}
+#section-table table {
+    width: 20%;
+    text-align: center;
+}
+#section-table table td{
+    padding: 10px 0;
+    border-top: 1px solid #d7d7d7;
+}
+</style>
 <body>
 <div th:if="${success}" >
     <span th:text="${success}"></span>
@@ -12,36 +72,36 @@
 <div th:if="${error}"  >
     <span th:text="${error}"></span>
 </div>
-<form th:action="@{/user/addbeneficiary}"  th:method="post" class="inscription">
+<!--<div th:replace="~{fragments/header :: header}"></div>-->
+<section >
+    <form th:action="@{/user/addbeneficiary}"  th:method="post" id="post-form">
 
-    <input type="hidden" name="_method" value="put" />
+        <input type="hidden" name="_method" value="put" />
 
-   <!-- <label for="name">user name:</label>
-    <input type="text" id="name"  name="username" th:placeholder="${user.username}" /><br><br>-->
-    <!--    <input type="text" id="name" name="username" th:field="*{username}"><br><br>-->
-    <label for="mail">mail:</label>
-    <input type="text" id="mail"  name="email"  /><br><br>
-    <!--    <input type="text" id="mail" name="email" th:field="*{email}"><br><br>-->
-    <!--<label for="pass">password:</label>
-    <input type="text" id="pass"  name="password" th:placeholder="${user.password}" /><br><br>-->
-    <!--    <input type="text" id="pass" name="password" th:field="*{password}"><br><br>-->
-    <input type="submit" value="addfriend">
-</form>
+        <label for="email">Add a Friend's email </label>
+        <input type="submit" value="Ajouter" onclick="addRelationship()" id="submit">
+        <input type="text" name="email" placeholder="enter email of your friend " id="email" >
+    </form>
+</section>
+<section id="section-table">
+    <h1>My Friends</h1>
 
-<table>
-    <thead>
-    <tr>
-        <th>friends</th>
+    <table>
+        <thead>
+        <tr>
+            <th>email</th>
+            <th>name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="friend:${friends}">
+            <td th:text="${friend.email}"></td>
+            <td th:text="${friend.username}"></td>
+        </tr>
+        </tbody>
+    </table>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="friend:${friends}">
-        <td th:text="${friend.email}"></td>
-    </tr>
-    </tbody>
-</table>
-
+</section>
 
 <a th:href="@{/user/modify}" >modify</a>
 <a th:href="@{/user/alltransaction}" >profile</a>
