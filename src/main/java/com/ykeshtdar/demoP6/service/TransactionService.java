@@ -26,22 +26,23 @@ public class TransactionService {
         this.userService = userService;
     }
 
-    public Transaction createTransaction( String email, float amount,String description) {
+    public Transaction createTransaction( String email, String amount,String description) {
+        float transformedamount = Float.parseFloat(amount);
 
-        if (hasValidSender() && hasVaidAmount(amount) && hasValidReceiver(email) ){
+        if (hasValidSender() && hasVaidAmount(transformedamount) && hasValidReceiver(email) ){
             User sender  = getconnectedUser();
             User receiver = userRepository.findByEmail(email)
                             .orElseThrow(()->new RuntimeException("receiverEmail is not exist in database"));
 
-            transferMoney(receiver,amount);
+            transferMoney(receiver,transformedamount);
             Date date = Date.from(Instant.now());
             Transaction transaction = new Transaction();
             transaction.setSender(sender);
             transaction.setReceiver(receiver);
-            transaction.setFee((float) (fee*amount));
+            transaction.setFee((float) (fee*transformedamount));
             transaction.setDate(date);
             transaction.setDescription(description);
-            transaction.setAmount(amount);
+            transaction.setAmount(transformedamount);
           return   transactionRepository.save(transaction);
 
         }
