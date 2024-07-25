@@ -72,7 +72,7 @@
 <div th:if="${error}"  >
     <span th:text="${error}"></span>
 </div>
-<!--<div th:replace="~{fragments/header :: header}"></div>-->
+<div th:replace="~{fragments/header :: header}"></div>
 <section >
     <form th:action="@{/user/addbeneficiary}"  th:method="post" id="post-form">
 

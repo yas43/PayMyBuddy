@@ -1,0 +1,61 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<style th:fragment="header">
+    nav#nav-bar{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items:center;
+    justify-items: center;
+
+}
+nav#nav-bar a{
+    text-align: center;
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    grid-row: 1;
+    font-weight: 600;
+}
+nav#nav-bar a:hover{
+    color: #207FEE;
+
+}
+#transfer{
+    grid-column: 4/5;
+}
+#profil{
+    grid-column: 5/6;
+}
+#ajouter{
+    grid-column: 6/7;
+}
+#logout{
+    grid-column: 7/8;
+}
+#logo{
+    text-align: center;
+    font-weight: 800;
+}
+</style>
+<body>
+
+<nav id="nav-bar" th:fragment="header">
+    <div class="nav-element" id="logo">Pay My Buddy</div>
+    <div class="nav-element"></div>
+    <a class="nav-element" id="transfer" th:href="@{/user/alltransaction}">profile</a>
+    <a class="nav-element" id="profil" th:href="@{/user/modify}">modify</a>
+    <a class="nav-element" id="ajouter" th:href="@{/user/addbeneficiary}">AddFriend</a>
+    <a class="nav-element" id="logout" th:href="@{/logout}">logout</a>
+</nav>
+
+</body>
+</html>

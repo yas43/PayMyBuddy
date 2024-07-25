@@ -6,12 +6,12 @@
     <title>Title</title>
 </head>
 <body>
-
+<div th:replace="~{/fragments/header :: header}"></div>
 <h1 th:text="${'wellcome  '+username}"> wellcome</h1>
-<a th:href="@{/user/modify}" >modify</a>
+<!--<a th:href="@{/user/modify}" >modify</a>
 <a th:href="@{/user/alltransaction}" >profile</a>
 <a th:href="@{/user/addbeneficiary}" >addfriends</a>
-<a th:href="@{/logout}" >logout</a>
+<a th:href="@{/logout}" >logout</a>-->
 
 
 </body>
