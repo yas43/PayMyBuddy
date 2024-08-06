@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.authentication.dao.*;
+import org.springframework.security.config.annotation.authentication.builders.*;
+import org.springframework.security.config.annotation.authentication.configuration.*;
 import org.springframework.security.config.annotation.web.builders.*;
 import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.config.annotation.web.configurers.*;
@@ -40,7 +42,7 @@ public class SecurityConfiguration {
                                     .loginPage("/user/login")
                                     .failureUrl("/user/login?error=true")
                                     .defaultSuccessUrl("/user/logIn",true)
-                                    .loginProcessingUrl("/user/logIn")
+                                    .loginProcessingUrl("/login")
                                     .usernameParameter("email")
                                     .passwordParameter("password")
                                     .successHandler(new AuthenticationSuccessHandler())
@@ -73,6 +75,21 @@ public class SecurityConfiguration {
         daoAuthenticationProvider.setUserDetailsService(userDetailsService());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
+    }
+//    @Bean
+//    AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
+//        AuthenticationManagerBuilder authenticationManagerBuilder =
+//                httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+//        authenticationManagerBuilder
+//                .userDetailsService(customUserDetailService)
+//                .passwordEncoder(passwordEncoder());
+//        return authenticationManagerBuilder.build();
+
+//    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
 }

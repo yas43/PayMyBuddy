@@ -22,6 +22,9 @@ public class UserController {
     private final UserRepository userRepository;
     private final CustomUserDetailService customUserDetailService;
 
+//    @Autowired
+//    AuthenticationManager authenticationManager;
+
 
     @Autowired
     public UserController(UserService userService, UserRepository userRepository, CustomUserDetailService customUserDetailService) {
@@ -53,12 +56,17 @@ public class UserController {
         model.addAttribute("User",new User());
         return "logIn";
     }
-    @PostMapping("/login")
-    public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
-//        userService.logIn(email);
-        customUserDetailService.loadUserByUsername(email);
-        return"redirect:/user/logIn";
-    }
+//    @PostMapping("/login")
+//    public String addUser(@RequestParam("email") String email,@RequestParam("password")String password){
+////        userService.logIn(email);
+//        customUserDetailService.loadUserByUsername(email);
+//        return"redirect:/user/logIn";
+
+//        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email,password);
+//        Authentication authentication = authenticationManager.authenticate(authToken);
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        return "user logged successfully";
+//    }
 
     @GetMapping("/welcome")
     public  String welcome(Model model){
