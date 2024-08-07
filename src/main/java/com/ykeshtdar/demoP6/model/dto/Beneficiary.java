@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Beneficiary {
+
     int id;
     int userId;
     int friendId;

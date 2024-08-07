@@ -1,8 +1,10 @@
 package com.ykeshtdar.demoP6.service;
 
 import com.ykeshtdar.demoP6.model.*;
+import com.ykeshtdar.demoP6.model.Transaction;
 import com.ykeshtdar.demoP6.model.User;
 import com.ykeshtdar.demoP6.repository.*;
+import jakarta.transaction.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.core.*;
 import org.springframework.security.core.context.*;
@@ -26,6 +28,7 @@ public class TransactionService {
         this.userService = userService;
     }
 
+    @Transactional
     public Transaction createTransaction( String email, String amount,String description) {
         float transformedamount = Float.parseFloat(amount);
 
@@ -59,39 +62,34 @@ public class TransactionService {
     }
 
     private boolean hasValidReceiver(String email) {
-//        boolean beneficiaryHasValidEmail =  UserService.isValidEmail(email);
-//        User receiver = userRepository.findByEmail(email)
-//                .orElseThrow(()->new RuntimeException("receiverEmail is not exist in database"));
-//        boolean beneficiaryIsInFriendList = userService.getconnectedUser().getUserSet().contains(receiver);
-//
-//        if (beneficiaryHasValidEmail && beneficiaryIsInFriendList){
-//            return true;
-//        }
-//        else return false;
-        return true;
+        boolean beneficiaryHasValidEmail =  UserService.isValidEmail(email);
+        User receiver = userRepository.findByEmail(email)
+                .orElseThrow(()->new RuntimeException("receiverEmail is not exist in database"));
+        boolean beneficiaryIsInFriendList = userService.getconnectedUser().getUserSet().contains(receiver);
+
+        if (beneficiaryHasValidEmail && beneficiaryIsInFriendList){
+            return true;
+        }
+        else return false;
+//        return true;
     }
 
     private boolean hasVaidAmount(float amount) {
-//        if (userService.getconnectedUser().getBalance()>=(1+fee)*amount && amount>0){
-//            return true;
-//        }
-//        else return false;
-        return true;
+        if (userService.getconnectedUser().getBalance()>=(1+fee)*amount && amount>0){
+            return true;
+        }
+        else return false;
+//        return true;
     }
 
     private boolean hasValidSender() {
-//        User sender = userRepository.findById(senderId)
+//        User sender = userRepository.findById(senderId);
         return true;
 
 
     }
 
 
-
-
-//    public List<Transaction> displayTransaction(int receiverId, int senderId){
-//       return transactionRepository.findTransactions(receiverId,senderId);
-//    }
 
     public User getconnectedUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

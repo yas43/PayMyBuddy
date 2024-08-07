@@ -33,62 +33,14 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
     Set<User>userSet = new HashSet<>();
-//    @OneToMany(mappedBy = "sender")
-//    List<Transaction> transactionList;
+
     @OneToMany(mappedBy = "sender")
     Set<Transaction>sendertransactionSet = new HashSet<>();
     @OneToMany(mappedBy = "receiver")
     Set<Transaction> recievertransactionSet = new HashSet<>();
-//    @OneToMany(mappedBy = "receiver")
-//    List<Beneficiary> beneficiaryList;
+
     @Column(name = "balance")
     float balance;
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public List<Transaction> getTransactionList() {
-//        return transactionList;
-//    }
-//
-//    public float getBalance() {
-//        return balance;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public void setTransactionList(List<Transaction> transactionList) {
-//        this.transactionList = transactionList;
-//    }
-//
-//    public void setBalance(float balance) {
-//        this.balance = balance;
-//    }
+
 }

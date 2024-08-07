@@ -25,7 +25,6 @@ public class UserRegistryRestController {
     @PostMapping("/user")
     public User adduser(@RequestBody User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        System.out.println("hello i am here"+user.getEmail());
         return userRepository.save(user);
     }
     @PutMapping("/{userId}/friend/{friendId}")
@@ -43,8 +42,7 @@ public class UserRegistryRestController {
                 .orElseThrow(()->new RuntimeException("no user with this id"));
         User receiverUser = userRepository.findById(receiverId)
                 .orElseThrow(()->new RuntimeException("no user with this id"));
-//        System.out.println("sender name = "+senderUser.getUsername());
-//        System.out.println("receiver name = "+receiverUser.getUsername());
+
         Transaction transaction = new Transaction();
         transaction.setSender(senderUser);
         transaction.setReceiver(receiverUser);
@@ -59,10 +57,10 @@ public class UserRegistryRestController {
     public void deleteUser(@RequestParam String email){
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()->new RuntimeException("email is not correct"));
-//        if (passwordEncoder.encode(user.getPassword()).equals(password)){
+
             userRepository.delete(user);
-//        }
-//        else throw new RuntimeException("password is not correct");
+
+
     }
 }
 

@@ -22,8 +22,7 @@ public class UserController {
     private final UserRepository userRepository;
     private final CustomUserDetailService customUserDetailService;
 
-//    @Autowired
-//    AuthenticationManager authenticationManager;
+
 
 
     @Autowired
@@ -47,8 +46,7 @@ public class UserController {
         }catch (Exception e){
             return "signUp";
         }
-//        userService.createUser(user);
-//        return"save";
+
     }
 
     @GetMapping("/login")
@@ -82,17 +80,13 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             Object principal = authentication.getPrincipal();
             UserDetails userDetails = (UserDetails) principal;
-//            System.out.println(userDetails.getUsername());
-//        System.out.println(userRepository.findByEmail(userDetails.getUsername()));
 var user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(()->new UsernameNotFoundException("user did not found"));
         model.addAttribute("user",user);
         return "modifyinfo";
 
 
-//        int id = 2;
-//        model.addAttribute("user",userRepository.findById(id) );
-//        return "modifyinfo";
+
     }
 
     @PutMapping("/modify")
@@ -118,13 +112,7 @@ var user = userRepository.findByEmail(userDetails.getUsername())
         return "comptpage";
 }
 
-//@PostMapping("/alltransaction")
-//    public String displayalltransaction(Model model,@RequestParam("email") String email){
-////    System.out.println("senderId is :"+senderId);
-//    System.out.println("receiverId is "+email);
-//        model.addAttribute("transaction",userService.findallTransaction());
-//        return "comptpage";
-//}
+
 
 @GetMapping("addbeneficiary")
 public String addbeneficiary(Model model){
@@ -138,19 +126,7 @@ public String addbeneficiary(Model model){
 
 @PutMapping("/addbeneficiary")
     public String addbeneficiary(@RequestParam("email") String email, RedirectAttributes redirectAttributes){
-//        User beneficiary = userRepository.findByEmail(email)
-//                .orElseThrow(()->new UsernameNotFoundException("this email dose not exist"));
-//    System.out.println("beneficiary email is"+beneficiary.getEmail());
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        Object principle = authentication.getPrincipal();
-//        UserDetails userDetails = (UserDetails) principle;
-//       User user = userRepository.findByEmail(userDetails.getUsername())
-//               .orElseThrow(()->new UsernameNotFoundException("user did not find"));
-//    System.out.println("user email is "+user.getEmail());
-//       user.getUserSet().add(beneficiary);
-//    System.out.println(user.getUserSet());
-//       userRepository.save(user);
+
    try {
        userService.addBeneficiary(email);
        redirectAttributes.addFlashAttribute("success","friend added successfuly");

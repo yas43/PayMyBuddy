@@ -16,10 +16,7 @@ public class TransactionController {
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
-//    @GetMapping
-//    public String pay(){
-//        return "comptpage";
-//    }
+
 
     @PostMapping("/pay")
     public String pay(@RequestParam(value = "email",defaultValue = "")String receiverEmail,
